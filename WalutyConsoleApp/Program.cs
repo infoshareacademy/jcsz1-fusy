@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace waluty
+namespace WalutyConsoleApp
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome  in app");
+            Console.WriteLine("Hello World!");
         }
     }
 }
