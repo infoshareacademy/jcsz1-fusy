@@ -1,30 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader
     {
-        private String PathToFile = @"..\\LoadingFromFile\FilesToLoad\omeganbp";
+        private String PathToFile = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
 
-        public StreamReader LoadFromFile(string fileName)
+        public Currency LoadFromFile(string fileName)
         {
-            PathToFile = PathToFile + @"\" + fileName + ".txt";
-            PathToFile = Path.GetFullPath(PathToFile);
-            PathToFile = @"C:\Users\Dariusz J\Documents\Repos\Projekt\jcsz1 - fusy\WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp\gbp.txt";
+            return null;
+        }
 
+        private StreamReader LoadStreamFromFile(string fileName)
+        {
+            StreamReader reader;
+
+            PathToFile = Path.Combine(PathToFile, fileName);
+            PathToFile = Path.Combine(Directory.GetParent
+                                     (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
+                                     PathToFile);           
             if (File.Exists(PathToFile))
             {
-                StreamReader streamReader = File.OpenText(PathToFile);
+                reader = File.OpenText(PathToFile);     
             }
             else
             {
                 throw new FileLoadException();
             }
-
-            return  null;
+            return  reader;
         }
     }
 }

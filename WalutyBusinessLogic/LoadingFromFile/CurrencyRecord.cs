@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
-    class CurrencyRecord
+    public class CurrencyRecord
     {
         public int Date { get; set; }
         public float Open { get; set; }

@@ -10,10 +10,11 @@ namespace WalutyConsoleApp
         {
             Console.WriteLine("Hello World!");
 
+            // For tests, to be removed later
             Loader loader = new Loader();
-            StreamReader loadFromFile = loader.LoadFromFile("GBP");
 
-            Console.WriteLine(loadFromFile);
+              
+            Console.ReadKey();
         }
     }
 }

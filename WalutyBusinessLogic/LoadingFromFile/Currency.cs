@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
-    class Currency
+    public class Currency
     {
         public string Name { get; set; }
         public List<CurrencyRecord> Type { get; set; }
