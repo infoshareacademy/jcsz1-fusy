@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------
+data          czas      rozmiar  plik              opis
+-------------------------------------------------------------------------
+2019-01-18    15:32      283 kB  AUD.txt           dolar australijski  
+2019-01-18    15:32      128 kB  BGN.txt           lew bulgarski       
+2019-01-18    15:32      120 kB  BRL.txt           real brazylijski    
+2019-01-18    15:32      283 kB  CAD.txt           dolar kanadyjski    
+2019-01-18    15:32      283 kB  CHF.txt           frank szwajcarski   
+2019-01-18    15:32       80 kB  CLP.txt           peso chilijskie     
+2019-01-18    15:32      120 kB  CNY.txt           yuan renminbi (Chiny)
+2019-01-18    15:32      218 kB  CZK.txt           korona czeska       
+2019-01-18    15:32      283 kB  DKK.txt           korona dunska       
+2019-01-18    15:32      218 kB  EUR.txt           euro                
+2019-01-18    15:32      283 kB  GBP.txt           funt szterling      
+2019-01-18    15:32      174 kB  HKD.txt           dolar Hongkongu     
+2019-01-18    15:32      120 kB  HRK.txt           kuna chorwacka      
+2019-01-18    15:32      218 kB  HUF.txt           forint (Wegry)      
+2019-01-18    15:32      120 kB  IDR.txt           rupia (Indonezja)   
+2019-01-18    15:32       81 kB  ILS.txt           nowy szekel izraelski
+2019-01-18    15:32       81 kB  INR.txt           rupia indyjska      
+2019-01-18    15:32      120 kB  ISK.txt           korona islandzka    
+2019-01-18    15:32      283 kB  JPY.txt           jen (Japonia)       
+2019-01-18    15:32      120 kB  KRW.txt           won (Korea Pld.)    
+2019-01-18    15:32      120 kB  MXN.txt           peso meksykanskie   
+2019-01-18    15:32      120 kB  MYR.txt           ringgit malezyjski  
+2019-01-18    15:32      283 kB  NOK.txt           korona norweska     
+2019-01-18    15:32      120 kB  NZD.txt           dolar nowozelandzki 
+2019-01-18    15:32      120 kB  PHP.txt           peso filipinskie    
+2019-01-18    15:32      128 kB  RON.txt           lej rumunski        
+2019-01-18    15:32      174 kB  RUB.txt           rubel rosyjski      
+2019-01-18    15:32      283 kB  SEK.txt           korona szwedzka     
+2019-01-18    15:32      120 kB  SGD.txt           dolar singapurski   
+2019-01-18    15:32      120 kB  THB.txt           bat (Tajlandia)     
+2019-01-18    15:32      120 kB  TRY.txt           lira turecka        
+2019-01-18    15:32      174 kB  UAH.txt           hrywna (Ukraina)    
+2019-01-18    15:32      283 kB  USD.txt           dolar amerykanski   
+2019-01-18    15:32      283 kB  XDR.txt           SDR (MFW)           
+2019-01-18    15:32      174 kB  ZAR.txt           rand (RPA)          
+-------------------------------------------------------------------------
+                        6238 kB  35 plikow

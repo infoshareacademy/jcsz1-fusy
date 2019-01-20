@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "WalutyConsoleApp/1.0.0": {
+        "dependencies": {
+          "WalutyBusinessLogic": "1.0.0"
+        },
         "runtime": {
           "WalutyConsoleApp.dll": {}
+        }
+      },
+      "WalutyBusinessLogic/1.0.0": {
+        "runtime": {
+          "WalutyBusinessLogic.dll": {}
         }
       }
     }
   },
   "libraries": {
     "WalutyConsoleApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WalutyBusinessLogic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
