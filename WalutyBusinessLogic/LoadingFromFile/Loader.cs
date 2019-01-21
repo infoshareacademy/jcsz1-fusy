@@ -14,10 +14,12 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         public Currency LoadFromFile(string fileName)
         {
-            return null;
+            StreamReader streamReader = LoadStreamFromFile(fileName);
+            List<string> readedFile = GetLinesFromStreamReader(streamReader);
+            return GetCurrency(readedFile);
         }
 
-        public StreamReader LoadStreamFromFile(string fileName)
+        private StreamReader LoadStreamFromFile(string fileName)
         {
             StreamReader reader;
 
@@ -36,7 +38,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
             return  reader;
         }
 
-        public List<string> GetLinesFromStreamReader(StreamReader streamReader)
+        private List<string> GetLinesFromStreamReader(StreamReader streamReader)
         {
             List<string> listOfLines = new List<string>();
 
@@ -54,7 +56,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
             return listOfLines;
         }
 
-        public Currency GetCurrency(List<string> listOfLines)
+        private Currency GetCurrency(List<string> listOfLines)
         {
             string[] splittedLine;
             Currency currency = new Currency();
