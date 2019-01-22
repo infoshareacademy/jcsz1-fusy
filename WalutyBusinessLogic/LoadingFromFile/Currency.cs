@@ -14,9 +14,10 @@ namespace WalutyBusinessLogic.LoadingFromFile
             Name = name;
             ListOfRecords = new List<CurrencyRecord>();
         }
+
         public Currency()
         {
             ListOfRecords = new List<CurrencyRecord>();
-    }
+        }
     }
 }
