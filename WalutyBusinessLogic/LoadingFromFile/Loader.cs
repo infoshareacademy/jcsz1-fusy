@@ -19,22 +19,32 @@ namespace WalutyBusinessLogic.LoadingFromFile
             return GetCurrency(linesFromFile);
         }
 
+        public List<Currency> GetListOfAllCurrencies()
+        {
+            List<Currency> currencies = new List<Currency>();
+
+            foreach(string currencyFileName in GetAvailableTxtFilesNames())
+            {
+                currencies.Add(LoadCurrencyFromFile(currencyFileName));
+            }
+            return currencies;
+        }
+
         public List<string> GetAvailableTxtFilesNames()
         {
             string pathToDirectory = Path.Combine(Directory.GetParent
                                                  (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName
                                                  ,PathToDirectory);          
-            string[] filePaths = Directory.GetFiles(pathToDirectory, "*.txt",SearchOption.TopDirectoryOnly);
+            string[] filePaths = Directory.GetFiles(pathToDirectory, "*.txt", SearchOption.TopDirectoryOnly);
             List<string> listOfFileNames = new List<string>();
 
             foreach(string line in filePaths)
             {
                 listOfFileNames.Add(Path.GetFileName(line));
             }
-            
+           
             return listOfFileNames;
         } 
-
 
         private StreamReader LoadStreamFromFile(string fileName)
         {
@@ -101,7 +111,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
                 }
                 catch(System.FormatException e)
                 {
-                    Console.WriteLine("error loading code at line: " + i);
+                    Console.WriteLine("error loading file at line: " + i);
                     Console.ReadKey();
                 }
                 currency.ListOfRecords.Add(currencyRecord);
