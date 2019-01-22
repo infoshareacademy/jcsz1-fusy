@@ -13,11 +13,12 @@ namespace WalutyConsoleApp
 
             // For tests, to be removed later
             Loader loader = new Loader();
-            loader.LoadFromFile("Gbp.txt");
+            loader.LoadCurrencyFromFile("Gbp.txt");
 
-           
-            
-              
+            foreach(var line in loader.GetAvailableTxtFilesNames())
+            {
+                Console.WriteLine(line);
+            }
             Console.ReadKey();
         }
     }

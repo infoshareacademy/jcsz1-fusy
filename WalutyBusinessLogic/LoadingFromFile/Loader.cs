@@ -9,27 +9,46 @@ namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader
     {
-        private String PathToFile = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
+        private String PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
         private String Separator = ",";
 
-        public Currency LoadFromFile(string fileName)
+        public Currency LoadCurrencyFromFile(string fileName)
         {
-            StreamReader streamReader = LoadStreamFromFile(fileName);
-            List<string> readedFile = GetLinesFromStreamReader(streamReader);
-            return GetCurrency(readedFile);
+            StreamReader streamReaderFromFile = LoadStreamFromFile(fileName);
+            List<string> linesFromFile = GetLinesFromStreamReader(streamReaderFromFile);
+            return GetCurrency(linesFromFile);
         }
+
+        public List<string> GetAvailableTxtFilesNames()
+        {
+            string pathToDirectory = Path.Combine(Directory.GetParent
+                                                 (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName
+                                                 ,PathToDirectory);          
+            string[] filePaths = Directory.GetFiles(pathToDirectory, "*.txt",SearchOption.TopDirectoryOnly);
+            List<string> listOfFileNames = new List<string>();
+
+            foreach(string line in filePaths)
+            {
+                listOfFileNames.Add(Path.GetFileName(line));
+            }
+            
+            return listOfFileNames;
+        } 
+
 
         private StreamReader LoadStreamFromFile(string fileName)
         {
+            string pathToFile = PathToDirectory;
             StreamReader reader;
 
-            PathToFile = Path.Combine(PathToFile, fileName);
-            PathToFile = Path.Combine(Directory.GetParent
+            pathToFile = Path.Combine(pathToFile, fileName);
+            pathToFile = Path.Combine(Directory.GetParent
                                      (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
-                                     PathToFile);           
-            if (File.Exists(PathToFile))
+                                      pathToFile);   
+            
+            if (File.Exists(pathToFile))
             {
-                reader = File.OpenText(PathToFile);     
+                reader = File.OpenText(pathToFile);     
             }
             else
             {
@@ -66,14 +85,11 @@ namespace WalutyBusinessLogic.LoadingFromFile
             {
                 currencyRecord = new CurrencyRecord();
                 splittedLine = listOfLines[i].Split(Separator);
-
-                
           
                 if (i == 0)
                 {
                     currency.Name = splittedLine[0];
                 }
-
                 try
                 {
                     currencyRecord.Date = Convert.ToInt32(splittedLine[1]);
@@ -88,11 +104,8 @@ namespace WalutyBusinessLogic.LoadingFromFile
                     Console.WriteLine("error loading code at line: " + i);
                     Console.ReadKey();
                 }
-
                 currency.ListOfRecords.Add(currencyRecord);
-
             }
-
             return currency;
         }
     }
