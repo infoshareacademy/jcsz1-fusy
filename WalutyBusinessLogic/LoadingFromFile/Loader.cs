@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Reflection;
-using System.Text;
+
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
@@ -23,14 +21,14 @@ namespace WalutyBusinessLogic.LoadingFromFile
         {
             List<Currency> currencies = new List<Currency>();
 
-            foreach(string currencyFileName in GetAvailableTxtFilesNames())
+            foreach(string currencyFileName in GetAvailableTxtFileNames())
             {
                 currencies.Add(LoadCurrencyFromFile(currencyFileName));
             }
             return currencies;
         }
 
-        public List<string> GetAvailableTxtFilesNames()
+        public List<string> GetAvailableTxtFileNames()
         {
             string pathToDirectory = Path.Combine(Directory.GetParent
                                                  (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName
