@@ -12,8 +12,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         public Currency LoadCurrencyFromFile(string fileName)
         {
-            StreamReader streamReaderFromFile = LoadStreamFromFile(fileName);
-            List<string> linesFromFile = GetLinesFromStreamReader(streamReaderFromFile);
+            List<string> linesFromFile = LoadLinesFromFile(fileName);
             return GetCurrency(linesFromFile);
         }
 
@@ -42,56 +41,50 @@ namespace WalutyBusinessLogic.LoadingFromFile
             }
            
             return listOfFileNames;
-        } 
+        }
 
-        private StreamReader LoadStreamFromFile(string fileName)
+        private List<string> LoadLinesFromFile(string fileName) 
         {
             string pathToFile = PathToDirectory;
-            StreamReader reader;
+            StreamReader streamReader;
+            List<string> listOfLines = new List<string>();
 
             pathToFile = Path.Combine(pathToFile, fileName);
             pathToFile = Path.Combine(Directory.GetParent
                                      (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
-                                      pathToFile);   
-            
+                                      pathToFile);
+
             if (File.Exists(pathToFile))
             {
-                reader = File.OpenText(pathToFile);     
+                streamReader = File.OpenText(pathToFile);
             }
             else
             {
                 throw new FileLoadException();
             }
-            return  reader;
-        }
-
-        private List<string> GetLinesFromStreamReader(StreamReader streamReader)
-        {
-            List<string> listOfLines = new List<string>();
-
             //Ignore first line from currenty data
             if (!streamReader.EndOfStream)
             {
                 streamReader.ReadLine();
             }
-            
+
             while (!streamReader.EndOfStream)
             {
                 listOfLines.Add(streamReader.ReadLine());
             }
 
             return listOfLines;
+
         }
 
         private Currency GetCurrency(List<string> listOfLines)
         {
             string[] splittedLine;
             Currency currency = new Currency();
-            CurrencyRecord currencyRecord;
 
             for(int i = 0; i < listOfLines.Count; i++)
             {
-                currencyRecord = new CurrencyRecord();
+                CurrencyRecord currencyRecord = new CurrencyRecord();
                 splittedLine = listOfLines[i].Split(Separator);
           
                 if (i == 0)
@@ -107,10 +100,10 @@ namespace WalutyBusinessLogic.LoadingFromFile
                     currencyRecord.Close = float.Parse(splittedLine[5].Replace(".", ","));
                     currencyRecord.Volume = float.Parse(splittedLine[6].Replace(".", ","));
                 }
-                catch(System.FormatException e)
+                catch(FormatException e)
                 {
                     Console.WriteLine("error loading file at line: " + i);
-                    Console.ReadKey();
+                    Console.WriteLine(e.Message);
                 }
                 currency.ListOfRecords.Add(currencyRecord);
             }

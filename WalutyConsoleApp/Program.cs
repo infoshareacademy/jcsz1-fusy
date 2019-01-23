@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using WalutyBusinessLogic.LoadingFromFile;
+
 
 namespace WalutyConsoleApp
 {
@@ -9,7 +7,7 @@ namespace WalutyConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
         }
     }
 }
