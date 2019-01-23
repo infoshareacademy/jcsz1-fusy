@@ -7,8 +7,8 @@ namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader
     {
-        private String PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
-        private String Separator = ",";
+        private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
+        private string Separator = ",";
 
         public Currency LoadCurrencyFromFile(string fileName)
         {
@@ -62,6 +62,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
             {
                 throw new FileLoadException();
             }
+
             //Ignore first line from currenty data
             if (!streamReader.EndOfStream)
             {
