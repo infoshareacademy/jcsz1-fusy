@@ -22,8 +22,6 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 
         public string CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, int date)
         {
-            try
-            {
                 DateTime dateFromInt = DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
 
                 Currency firstCurrency = loader.LoadCurrencyFromFile(firstCurrencyCode + FileExtension);
@@ -39,15 +37,9 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 
                 float comparision = firstCloseValue / secondCloseValue;
 
-                return
-                    $"Dnia {dateFromInt.ToShortDateString()} {firstCurrency.Name} jest warta {comparision} {secondCurrency.Name}";
-            }
-            catch (Exception e)
-            {
-                return "Elo zle";
-            }
+                return $"Dnia {dateFromInt.ToShortDateString()} {firstCurrency.Name} jest warta {comparision} {secondCurrency.Name}";
         }
-
+        // ...
         // CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, int date) usage example:
 
         //CurrenciesComparator currencies = new CurrenciesComparator();
