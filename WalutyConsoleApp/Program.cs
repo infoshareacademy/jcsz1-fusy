@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using WalutyBusinessLogic.LoadingFromFile;
+using System.Globalization;
 
 namespace Console_Menu
 {
@@ -7,14 +10,13 @@ namespace Console_Menu
     {
         private static int index = 0;
 
-
         public static class MenuItem
         {
             public const string
-                item1 = "( 1 ) first item",
-                item2 = "( 2 ) second item",
-                item3 = "( 3 ) third item",
-                exit = "(Esc) Exit";
+                item1 = "SHOW ENTRIES FROM DATA RANGE",
+                item2 = "SHOW CURRENCIES IN PARTICULAR DAY",
+                item3 = "SHOW SUPPORTED CURRENCIES",
+                exit = "EXIT";
         }
 
         private static void Main(string[] args)
@@ -33,18 +35,26 @@ namespace Console_Menu
 
                 switch (selectedMenuItem)
                 {
-                    case MenuItem.item1:                        
-                        drawSubMenuBody("Generic FUNCTION ONE");
+                    case MenuItem.item1:
+                        drawSubMenuBody(MenuItem.item1);
+                        ShowSingleCurrencyEntriesByDataRange();
+                        Console.WriteLine("");
+                        Console.WriteLine("Press any key to exit");
                         Console.ReadKey();
                         Console.Clear();
                         break;
-                    case MenuItem.item2:                       
-                        drawSubMenuBody("Generic FUNCTION SECOND");
+                    case MenuItem.item2:
+                        drawSubMenuBody(MenuItem.item2);
+                        ShowSingleCurrencyEntriesBySingleDate();
+                        Console.WriteLine("");
+                        Console.WriteLine("Press any key to exit");
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case MenuItem.item3:
-                        drawSubMenuBody("Generic FUNCTION THIRD");
+                        drawSubMenuBody(MenuItem.item3);
+                        ShowSupportedCurencies();
+                        drawSubMenuHelper();
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -67,7 +77,7 @@ namespace Console_Menu
                 if (i == index)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
-                    Console.ForegroundColor = ConsoleColor.Black;                    
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine(items[i]);
                 }
                 else
@@ -111,25 +121,29 @@ namespace Console_Menu
             }
 
             Console.Clear();
-            return "0";          
+            return "0";
         }
 
 
         private static void drawMenuHeader()
         {
             Console.WriteLine("========================== Welcome in WALUTY 2.0 ==========================");
-            Console.WriteLine("");            
+            Console.WriteLine("");
             Console.WriteLine("");
         }
 
         private static void drawSubMenuBody(string show)
         {
-            Console.Clear();                 
+            Console.Clear();
             drawMenuHeader();
             Console.WriteLine($"{show}");
+            // drawMenuHelper("Press any key to exit");
+        }
+
+        private static void drawSubMenuHelper()
+        {
             drawMenuHelper("Press any key to exit");
         }
-        
 
         private static void drawMenuHelper(string show)
         {
@@ -137,7 +151,206 @@ namespace Console_Menu
             {
                 Console.WriteLine("");
             }
+
             Console.WriteLine($"{show}");
+        }
+        // IEnumerator<Loader> enumerator = getCurrency.GetEnumerator();
+
+        public static void RunLoader()
+        {
+            Loader loader = new Loader();
+            var getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
+
+
+            foreach (var item in getCurrency.ListOfRecords)
+            {
+                Console.WriteLine($"Date= {item.Date} Open= {item.Open} High= {item.High} Low= {item.Low} Close= {item.Close}");
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine(getCurrency.ListOfRecords.Count);
+
+            // var currenciesFromRange = getCurrency.ListOfRecords.OrderByDescending(c => c.Date).Where(c => c.Date > 2000106).Where(c => c.Date < 20010106);
+            // IEnumerable<CurrencyRecord> currenciesFromRange = getCurrency.ListOfRecords.Where(c => c.Date > 2000106 && c.Date < 20010106);
+            IEnumerable<CurrencyRecord> currenciesFromRange = getCurrency.ListOfRecords.Where(c => c.Date < 20010106 && c.Date > 2000106);
+
+            //var zapytanie = from data in currenciesFromRange
+            //                where data.Date
+
+            IEnumerable<CurrencyRecord> currenciesFromRange1 =
+                getCurrency.ListOfRecords.Where(c => c.Date < 2001010)
+                    .Where(c => c.Date > 2000106);
+
+            Console.WriteLine("");
+
+            foreach (var item in currenciesFromRange)
+            {
+                Console.WriteLine($"Date= {item.Date} Open= {item.Open} High= {item.High} Low= {item.Low} Close= {item.Close}");
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine(getCurrency.ListOfRecords.Count);
+
+
+            var getCurrencies = loader.GetListOfAllCurrencies();
+
+            Console.Write(getCurrencies);
+
+            Console.WriteLine("");
+            foreach (var item in getCurrencies)
+            {
+                Console.Write($" {item.Name} ");
+            }
+
+
+            var getFileNames = loader.GetAvailableTxtFileNames();
+
+
+            for (int i = 0; i < getFileNames.Count; i++)
+            {
+                Console.WriteLine($"Name= {getFileNames}");
+            }
+
+
+            List<string> list = loader.GetAvailableTxtFileNames();
+
+            // Console.Write(getCurrency.ListOfRecords.); LINQ
+        }
+
+        public static void ShowSingleCurrencyEntriesByDataRange()
+        {
+            
+            var _inputCurrency    = "GBP.txt";
+            var _inputCurrencyTxt = "GBP";
+
+            var _startDate = "";
+            var _endDate = "";
+
+            Loader loader = new Loader();
+            var getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
+
+            Console.WriteLine();
+            Console.WriteLine("Supported currencies : ");
+            ShowSupportedCurencies();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Enter currency : ");
+            _inputCurrency = Console.ReadLine().ToUpper();
+            _inputCurrencyTxt = String.Concat(_inputCurrency.ToUpper(), ".txt");
+            getCurrency = loader.LoadCurrencyFromFile(_inputCurrencyTxt);
+
+            _startDate = getCurrency.ListOfRecords.Min(x => x.Date).ToString();          
+            _endDate = getCurrency.ListOfRecords.Max(x => x.Date).ToString();
+
+            Console.WriteLine($"For {_inputCurrency} we have the range of dates you can take: ");
+            Console.WriteLine();
+            Console.WriteLine($"Start date : {_startDate.ToString()} End date : {_endDate} ");
+            //Console.WriteLine($"Start date : {_startDate.ToString("MMMM dd, yyyy", "pl-PL")} End date : {_endDate} ");
+
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.Write("Enter start Date : ");
+            _startDate = Console.ReadLine();
+
+            Console.WriteLine();
+            Console.Write("Enter end Date : ");
+            _endDate = Console.ReadLine();
+            //_endDate = Convert.ToInt32(_endDate);
+
+            // ===================================================================================================
+            //var currenciesInRange = getCurrency.ListOfRecords.Where(c => c.Date > 20011010 && c.Date < 20021010);
+
+            //foreach (CurrencyRecord record in currenciesInRange)
+            //{
+            //    Console.WriteLine($"{record.Date} {record.Close}");
+            //}
+            // ===================================================================================================            
+            //var currenciesInRange = getCurrency.ListOfRecords.Where(c => c.Date > Convert.ToInt32(_startDate) && c.Date < Convert.ToInt32(_endDate));
+
+            //foreach (CurrencyRecord record in currenciesInRange)
+            //{
+            //    Console.WriteLine($"{record.Date} {record.Close}");
+            //}
+            // ===================================================================================================
+
+            List<CurrencyRecord> listOfFilteredRecords = new List<CurrencyRecord>();
+            foreach (var record in getCurrency.ListOfRecords)
+            {
+                if (record.Date > Convert.ToInt32(_startDate) && record.Date < Convert.ToInt32(_endDate))
+                {
+                    listOfFilteredRecords.Add(record);
+                }
+            }
+            foreach (var filteredRecord in listOfFilteredRecords)
+            {
+                Console.WriteLine($"Date= {filteredRecord.Date} Open= {filteredRecord.Open} High= {filteredRecord.High} Low= {filteredRecord.Low} Close= {filteredRecord.Close}");
+            }
+        }
+
+        public static void ShowSingleCurrencyEntriesBySingleDate()
+        {
+
+            var _inputCurrency = "GBP.txt";
+            var _inputCurrencyTxt = "GBP";
+
+            var _startDate = "";
+            var _endDate = "";
+
+            Loader loader = new Loader();
+            var getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
+
+            Console.WriteLine();
+            Console.WriteLine("Supported currencies : ");
+            ShowSupportedCurencies();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Enter currency : ");
+            _inputCurrency = Console.ReadLine().ToUpper();
+            _inputCurrencyTxt = String.Concat(_inputCurrency.ToUpper(), ".txt");
+            getCurrency = loader.LoadCurrencyFromFile(_inputCurrencyTxt);
+
+            _startDate = getCurrency.ListOfRecords.Min(x => x.Date).ToString();
+            _endDate = getCurrency.ListOfRecords.Max(x => x.Date).ToString();
+
+            Console.WriteLine($"For {_inputCurrency} we have the range of dates you can take: ");
+            Console.WriteLine();
+            Console.WriteLine($"Start date : {_startDate.ToString()} End date : {_endDate} ");
+            //Console.WriteLine($"Start date : {_startDate.ToString("MMMM dd, yyyy", "pl-PL")} End date : {_endDate} ");
+
+            Console.WriteLine();
+
+            Console.WriteLine();
+            Console.Write("Enter single Date : ");
+            _startDate = Console.ReadLine();
+
+
+            List<CurrencyRecord> listOfFilteredRecords = new List<CurrencyRecord>();
+            foreach (var record in getCurrency.ListOfRecords)
+            {
+                if (record.Date > Convert.ToInt32(_startDate) && record.Date == Convert.ToInt32(_endDate))
+                {
+                    listOfFilteredRecords.Add(record);
+                }
+            }
+            foreach (var filteredRecord in listOfFilteredRecords)
+            {
+                Console.WriteLine($"Date= {filteredRecord.Date} Open= {filteredRecord.Open} High= {filteredRecord.High} Low= {filteredRecord.Low} Close= {filteredRecord.Close}");
+            }
+        }
+
+        public static void ShowSupportedCurencies()
+        {
+            Loader loader = new Loader();
+            var getCurrencies = loader.GetListOfAllCurrencies();
+            var enumerator = getCurrencies.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                Console.Write($"{enumerator.Current.Name} ");
+            }
         }
     }
 }
