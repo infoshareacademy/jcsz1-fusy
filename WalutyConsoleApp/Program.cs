@@ -1,5 +1,5 @@
 ﻿using System;
-
+using WalutyBusinessLogic.CurrencyConversion;
 
 namespace WalutyConsoleApp
 {
@@ -7,7 +7,6 @@ namespace WalutyConsoleApp
     {
         static void Main(string[] args)
         {
-
         }
     }
 }
