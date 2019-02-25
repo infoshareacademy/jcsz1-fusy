@@ -10,8 +10,7 @@ namespace Console_Menu
 {
     class Program : DrawMenu
     {
-        
-
+        private static Loader loader = new Loader();
         private static class MenuItem
         {
             public const string
@@ -82,7 +81,6 @@ namespace Console_Menu
 
         private static void RunLoader()
         {
-            Loader loader = new Loader();
             var getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
             var getFileNames = loader.GetAvailableTxtFileNames();
             var getCurrencies = loader.GetListOfAllCurrencies();
@@ -120,7 +118,6 @@ namespace Console_Menu
 
         private static void ShowSingleCurrencyEntriesByDataRange()
         {
-            Loader loader = new Loader();
             var _getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
             var _inputCurrency    = "GBP.txt";
             var _inputCurrencyTxt = "GBP";
@@ -164,7 +161,6 @@ namespace Console_Menu
 
         private static void ShowSingleCurrencyEntriesBySingleDate()
         {
-            Loader loader = new Loader();
             var getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
             var _inputCurrency = "GBP.txt";
             var _inputCurrencyTxt = "GBP";
@@ -210,7 +206,6 @@ namespace Console_Menu
 
         private static void CompareTwoCurrenciesBySingleDate()
         {
-            Loader loader = new Loader();
             var _inputCurrency1 = "GBP.txt";
             var _inputCurrency1Txt = "GBP";
             var _inputCurrency2 = "AUD.txt";
@@ -253,7 +248,6 @@ namespace Console_Menu
 
         private static void ShowSupportedCurencies()
         {
-            Loader loader = new Loader();
             var getCurrencies = loader.GetListOfAllCurrencies();
             var enumerator = getCurrencies.GetEnumerator();
 
