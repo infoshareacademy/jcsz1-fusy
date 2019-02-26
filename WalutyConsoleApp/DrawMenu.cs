@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace WalutyConsoleApp
 {
@@ -8,8 +7,9 @@ namespace WalutyConsoleApp
     {
         private static int _index = 0;
 
-        public static void drawSubMenuHelper()
+        public static void drawPressAnyKey()
         {
+            Console.WriteLine("");
             drawMenuHelper("Press any key to exit");
         }
 

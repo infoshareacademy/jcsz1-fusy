@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using WalutyBusinessLogic.LoadingFromFile;
-
-namespace WalutyBusinessLogic.CurrencyConversion
+﻿namespace WalutyBusinessLogic.CurrencyConversion
 {
 
-    public class CurrencyForConversation
+    public class CurrencyToBeConverted
     {
         public float Value { get; set; }
         public float Amount { get; set; }

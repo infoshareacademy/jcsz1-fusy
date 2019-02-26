@@ -1,9 +1,8 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using WalutyBusinessLogic.LoadingFromFile;
-using System.Globalization;
+using System.Linq;
 using WalutyBusinessLogic.CurrenciesComparision;
+using WalutyBusinessLogic.LoadingFromFile;
 using WalutyConsoleApp;
 
 namespace Console_Menu
@@ -14,10 +13,11 @@ namespace Console_Menu
         private static class MenuItem
         {
             public const string
-                item1 = "SHOW ENTRIES FROM DATA RANGE",
-                item2 = "SHOW CURRENCIES IN PARTICULAR DAY",
-                item3 = "SHOW SUPPORTED CURRENCIES",
+                item1 = "SHOW SUPPORTED CURRENCIES",
+                item2 = "SHOW ALL CURRENCIES IN PARTICULAR DAY",
+                item3 = "SHOW ENTRIES FROM DATA RANGE",
                 item4 = "COMPARE CURRENCIES",
+                item5 = "CONVERT CURRENCY",
                 exit = "EXIT";
         }
 
@@ -28,6 +28,7 @@ namespace Console_Menu
                 MenuItem.item2,
                 MenuItem.item3,
                 MenuItem.item4,
+                MenuItem.item5,
                 MenuItem.exit
             };
 
@@ -40,31 +41,37 @@ namespace Console_Menu
                 {
                     case MenuItem.item1:
                         DrawMenu.drawSubMenuBody(MenuItem.item1);
-                        ShowSingleCurrencyEntriesByDataRange();
                         Console.WriteLine("");
-                        Console.WriteLine("Press any key to exit");
+                        ShowSupportedCurencies();
+                        DrawMenu.drawPressAnyKey();
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case MenuItem.item2:
                         DrawMenu.drawSubMenuBody(MenuItem.item2);
-                        ShowSingleCurrencyEntriesBySingleDate();
-                        Console.WriteLine("");
-                        Console.WriteLine("Press any key to exit");
+                        ShowSingleCurrencyEntriesBySingleDate();                        
+                        DrawMenu.drawPressAnyKey();
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case MenuItem.item3:
                         DrawMenu.drawSubMenuBody(MenuItem.item3);
-                        ShowSupportedCurencies();
-                        DrawMenu.drawSubMenuHelper();
+                        ShowSingleCurrencyEntriesBetweenDataRange();
+                        DrawMenu.drawPressAnyKey();
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case MenuItem.item4:
                         DrawMenu.drawSubMenuBody(MenuItem.item4);
                         CompareTwoCurrenciesBySingleDate();
-                        DrawMenu.drawSubMenuHelper();
+                        DrawMenu.drawPressAnyKey();
+                        Console.ReadKey();
+                        Console.Clear();
+                        break;
+                    case MenuItem.item5:
+                        DrawMenu.drawSubMenuBody(MenuItem.item5);
+                        ShowSupportedCurencies();
+                        DrawMenu.drawPressAnyKey();
                         Console.ReadKey();
                         Console.Clear();
                         break;
@@ -116,7 +123,7 @@ namespace Console_Menu
             List<string> list = loader.GetAvailableTxtFileNames();
         }
 
-        private static void ShowSingleCurrencyEntriesByDataRange()
+        private static void ShowSingleCurrencyEntriesBetweenDataRange()
         {
             var _getCurrency = loader.LoadCurrencyFromFile("GBP.txt");
             var _inputCurrency    = "GBP.txt";
@@ -248,6 +255,16 @@ namespace Console_Menu
 
         private static void ShowSupportedCurencies()
         {
+            Loader loader = new Loader();
+            var getCurrencies = loader.GetListOfAllCurrencies();
+            var enumerator = getCurrencies.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                Console.Write($"{enumerator.Current.Name} ");
+            }
+
+            Console.WriteLine("Press any key to exit");
         }
     }
 }
