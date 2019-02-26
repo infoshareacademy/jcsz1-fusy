@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using WalutyBusinessLogic.LoadingFromFile;
@@ -248,15 +248,6 @@ namespace Console_Menu
 
         private static void ShowSupportedCurencies()
         {
-            var getCurrencies = loader.GetListOfAllCurrencies();
-            var enumerator = getCurrencies.GetEnumerator();
-
-            Console.WriteLine();
-            Console.WriteLine("Supported currencies : ");         
-            while (enumerator.MoveNext())
-            {
-                Console.Write($"{enumerator.Current.Name} ");
-            }
         }
     }
 }
