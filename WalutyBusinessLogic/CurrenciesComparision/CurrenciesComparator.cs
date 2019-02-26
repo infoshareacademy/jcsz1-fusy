@@ -37,7 +37,7 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 
                 float comparision = firstCloseValue / secondCloseValue;
 
-                return $"Dnia {dateFromInt.ToShortDateString()} {firstCurrency.Name} jest warta {comparision} {secondCurrency.Name}";
+                return $"In day {dateFromInt.ToShortDateString()} {firstCurrency.Name} is worth {comparision} {secondCurrency.Name}";
         }
         // ...
         // CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, int date) usage example:
