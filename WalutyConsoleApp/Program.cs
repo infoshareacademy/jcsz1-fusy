@@ -8,7 +8,7 @@ using WalutyConsoleApp;
 
 namespace Console_Menu
 {
-    class Program : DrawMenu
+    class Program
     {
         private static Loader loader = new Loader();
         private static class MenuItem
@@ -34,12 +34,12 @@ namespace Console_Menu
             Console.CursorVisible = false;
             while (true)
             {
-                string selectedMenuItem = drawMenu(menuItems);
+                string selectedMenuItem = DrawMenu.drawMenu(menuItems);
 
                 switch (selectedMenuItem)
                 {
                     case MenuItem.item1:
-                        drawSubMenuBody(MenuItem.item1);
+                        DrawMenu.drawSubMenuBody(MenuItem.item1);
                         ShowSingleCurrencyEntriesByDataRange();
                         Console.WriteLine("");
                         Console.WriteLine("Press any key to exit");
@@ -47,7 +47,7 @@ namespace Console_Menu
                         Console.Clear();
                         break;
                     case MenuItem.item2:
-                        drawSubMenuBody(MenuItem.item2);
+                        DrawMenu.drawSubMenuBody(MenuItem.item2);
                         ShowSingleCurrencyEntriesBySingleDate();
                         Console.WriteLine("");
                         Console.WriteLine("Press any key to exit");
@@ -55,16 +55,16 @@ namespace Console_Menu
                         Console.Clear();
                         break;
                     case MenuItem.item3:
-                        drawSubMenuBody(MenuItem.item3);
+                        DrawMenu.drawSubMenuBody(MenuItem.item3);
                         ShowSupportedCurencies();
-                        drawSubMenuHelper();
+                        DrawMenu.drawSubMenuHelper();
                         Console.ReadKey();
                         Console.Clear();
                         break;
                     case MenuItem.item4:
-                        drawSubMenuBody(MenuItem.item4);
+                        DrawMenu.drawSubMenuBody(MenuItem.item4);
                         CompareTwoCurrenciesBySingleDate();
-                        drawSubMenuHelper();
+                        DrawMenu.drawSubMenuHelper();
                         Console.ReadKey();
                         Console.Clear();
                         break;
