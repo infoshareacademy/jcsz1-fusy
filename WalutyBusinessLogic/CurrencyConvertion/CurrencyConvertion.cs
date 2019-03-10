@@ -19,12 +19,12 @@ namespace WalutyBusinessLogic
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             CurrencyRecord desiredRecord = listOfRecords.Single(record => record.Date == date);
-            var CurrencyConvertionList = new List<CurrencyForConversation>();
+            var currencyConvertionList = new List<CurrencyForConversation>();
 
             firstCurrencyConvertion.Value = desiredRecord.Volume;
             firstCurrencyConvertion.Amount = amountCurrency;
             firstCurrencyConvertion.Name = nameCurrency;
-            CurrencyConvertionList.Add(firstCurrencyConvertion);
+            currencyConvertionList.Add(firstCurrencyConvertion);
 
             currency = loader.LoadCurrencyFromFile(secondNameCurrency);
             listOfRecords = currency.ListOfRecords;
@@ -36,9 +36,9 @@ namespace WalutyBusinessLogic
 
             secondCurrencyConvertion.Amount = firstCurrencyConvertion.Amount * firstCurrencyConvertion.Value /
                                                    secondCurrencyConvertion.Value;
-            CurrencyConvertionList.Add(secondCurrencyConvertion);
+            currencyConvertionList.Add(secondCurrencyConvertion);
 
-            return CurrencyConvertionList;
+            return currencyConvertionList;
         }
     }
 }
