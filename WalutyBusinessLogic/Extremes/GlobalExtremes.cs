@@ -18,24 +18,22 @@ namespace WalutyBusinessLogic.Extremes
             return extremeValue;
         }
    
-        public ExtremeValue GetLocalExtreme(string nameCurrency, int date, int date2)
+        public ExtremeValue GetLocalExtreme(string nameCurrency, int startDate, int endDate2)
         {
             ExtremeValue extremeValue = new ExtremeValue();
             Loader loader = new Loader();
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
 
-            extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= date && c.Date <= date2 )
+            extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate2)
                 .Max(c => c.High);
 
-            extremeValue.MinValue = listOfRecords.Where(c => c.Date >= date && c.Date <= date2)
+            extremeValue.MinValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate2)
                 .Min(c => c.Low);
 
             return extremeValue;
         }
 
     }
-
-
     
 }
