@@ -12,6 +12,10 @@
  * Sidebar
  */
 
+#menu a:active {
+    color: crimson;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
