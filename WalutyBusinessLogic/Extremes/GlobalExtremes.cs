@@ -12,20 +12,35 @@ namespace WalutyBusinessLogic.GlobaExtremes
 
         public ExtremeValue GetGlobaExtreme(string nameCurrency)
         {
-            ExtremeValue _extremeValue = new ExtremeValue();
+            ExtremeValue extremeValue = new ExtremeValue();
             nameCurrency += ".txt";
             Loader loader = new Loader();
             CurrencyRecord currencyRecord = new CurrencyRecord();
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
-            _extremeValue.MaxValue = listOfRecords.Max(c=> c.High);
-            _extremeValue.MinValue = listOfRecords.Min(c => c.Low);
-            return _extremeValue;
+            extremeValue.MaxValue = listOfRecords.Max(c=> c.High);
+            extremeValue.MinValue = listOfRecords.Min(c => c.Low);
+            return extremeValue;
         }
 
-
-
     }
+
+    class LocalExtremes
+    {
+        public ExtremeValue GetLocalExtreme(string nameCurrency, int date, int date2)
+        {
+            ExtremeValue extremeValue = new ExtremeValue();
+            nameCurrency += ".txt";
+            Loader loader = new Loader();
+            CurrencyRecord currencyRecord = new CurrencyRecord();
+            Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
+            List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
+            var e = listOfRecords.Select(c => c.Date > date && c.Date < date2 )
+                                                 .Max(c => c.);
+            return extremeValue;
+        }
+    }
+    
 
     public class ExtremeValue
     {
