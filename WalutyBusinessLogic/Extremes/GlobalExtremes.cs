@@ -6,7 +6,6 @@ namespace WalutyBusinessLogic.Extremes
 {
     public class GlobalExtremes
     {
-
         public ExtremeValue GetGlobalExtreme(string nameCurrency)
         {
             ExtremeValue extremeValue = new ExtremeValue();
@@ -30,7 +29,5 @@ namespace WalutyBusinessLogic.Extremes
                 .Min(c => c.Low);
             return extremeValue;
         }
-
     }
-    
 }
