@@ -5,14 +5,12 @@ using WalutyBusinessLogic.LoadingFromFile;
 using System.Globalization;
 using WalutyBusinessLogic.CurrenciesComparision;
 using WalutyConsoleApp;
-using WalutyBusinessLogic.GlobaExtremes;
 
 namespace Console_Menu
 {
     class Program
     {
         private static Loader loader = new Loader();
-        private  static GlobalExtremes _extrem = new GlobalExtremes();
         private static class MenuItem
         {
             
@@ -26,10 +24,6 @@ namespace Console_Menu
 
         private static void Main(string[] args)
         {
-            Console.WriteLine(_extrem.GetGlobaExtreme("AUD"));
-            Console.ReadKey();
-
-
             List<string> menuItems = new List<string>() {
                 MenuItem.item1,
                 MenuItem.item2,
