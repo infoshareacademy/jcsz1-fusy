@@ -9,13 +9,21 @@ namespace WalutyBusinessLogic
     {
         public float ValueFirstCurrency { get; set; }
         public float ValueSecondCurrency { get; set; }
+        public string FirstNameCurrency { get; set; }
+        public string SecondNameCurrency { get; set; }
 
-        public float ConvertCurrency(float amountFirstCurrency, string firstNameCurrency,
-            string secondNameCurrency, int date)
+        public CurrencyConvertion(string firstNameCurrency,
+            string secondNameCurrency)
         {
-            CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(firstNameCurrency, date);
+            FirstNameCurrency = firstNameCurrency;
+            SecondNameCurrency = secondNameCurrency;
+        }
+
+        public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency,  int date)
+        {
+            CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency, date);
             ValueFirstCurrency = FirstDesiredCurrency.Close;
-            CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(secondNameCurrency, date);
+            CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency, date);
             ValueSecondCurrency = SecondDesiredCurrency.Close;
             return amountFirstCurrency * ValueFirstCurrency / ValueSecondCurrency;
         }
