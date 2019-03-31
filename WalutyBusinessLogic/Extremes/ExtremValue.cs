@@ -8,10 +8,5 @@ namespace WalutyBusinessLogic.Extremes
     {
         public float MaxValue { get; set; }
         public float MinValue { get; set; }
-
-        public override string ToString()
-        {
-            return $"Max {MaxValue} ; Min {MinValue}";
-        }
     }
 }
