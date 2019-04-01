@@ -7,8 +7,6 @@ namespace WalutyBusinessLogic
 {
     public class CurrencyConvertion
     {
-        public float ValueFirstCurrency { get; set; }
-        public float ValueSecondCurrency { get; set; }
         public string FirstNameCurrency { get; set; }
         public string SecondNameCurrency { get; set; }
 
@@ -22,10 +20,8 @@ namespace WalutyBusinessLogic
         public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency,  int date)
         {
             CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency, date);
-            ValueFirstCurrency = FirstDesiredCurrency.Close;
             CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency, date);
-            ValueSecondCurrency = SecondDesiredCurrency.Close;
-            return amountFirstCurrency * ValueFirstCurrency / ValueSecondCurrency;
+            return FirstDesiredCurrency.Close * amountFirstCurrency / SecondDesiredCurrency.Close;
         }
 
         private CurrencyRecord GetDesiredCurrency(string nameCurrency,int  date)
