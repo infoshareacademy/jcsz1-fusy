@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
-    interface ILoader
+    public interface ILoader
     {
         Currency LoadCurrencyFromFile(string fileName);
         List<Currency> GetListOfAllCurrencies();
