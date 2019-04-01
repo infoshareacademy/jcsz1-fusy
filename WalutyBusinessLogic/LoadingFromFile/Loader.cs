@@ -5,7 +5,7 @@ using System.IO;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
-    public class Loader
+    public class Loader : ILoader
     {
         private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
         private string Separator = ",";
