@@ -21,7 +21,7 @@ namespace WalutyBusinessLogic
         {
             CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency, date);
             CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency, date);
-            return FirstDesiredCurrency.Close * amountFirstCurrency / SecondDesiredCurrency.Close;
+            return amountFirstCurrency * FirstDesiredCurrency.Close / SecondDesiredCurrency.Close;
         }
 
         private CurrencyRecord GetDesiredCurrency(string nameCurrency,int  date)
