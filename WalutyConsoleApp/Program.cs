@@ -13,6 +13,7 @@ namespace Console_Menu
         private static Loader loader = new Loader();
         private static class MenuItem
         {
+            
             public const string
                 item1 = "SHOW ENTRIES FROM DATA RANGE",
                 item2 = "SHOW CURRENCIES IN PARTICULAR DAY",
