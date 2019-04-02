@@ -4,7 +4,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyBusinessLogic.Extremes
 {
-    public class GlobalExtremes
+    public class Extremes
     {
         public ExtremeValue GetGlobalExtreme(string nameCurrency)
         {
@@ -17,7 +17,7 @@ namespace WalutyBusinessLogic.Extremes
             return extremeValue;
         }
    
-        public ExtremeValue GetLocalExtreme(string nameCurrency, int startDate, int endDate)
+        public ExtremeValue GetLocalExtreme(string nameCurrency , int startDate , int endDate)
         {
             ExtremeValue extremeValue = new ExtremeValue();
             Loader loader = new Loader();
