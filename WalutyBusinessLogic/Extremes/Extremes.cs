@@ -6,7 +6,7 @@ namespace WalutyBusinessLogic.Extremes
 {
     public class Extremes
     {
-        public ExtremeValue GetGlobalExtreme(string nameCurrency)
+        public ExtremeValue GetGlobalExtremes(string nameCurrency)
         {
             ExtremeValue extremeValue = new ExtremeValue();
             Loader loader = new Loader();
@@ -17,7 +17,7 @@ namespace WalutyBusinessLogic.Extremes
             return extremeValue;
         }
    
-        public ExtremeValue GetLocalExtreme(string nameCurrency , int startDate , int endDate)
+        public ExtremeValue GetLocalExtremes(string nameCurrency, int startDate, int endDate)
         {
             ExtremeValue extremeValue = new ExtremeValue();
             Loader loader = new Loader();

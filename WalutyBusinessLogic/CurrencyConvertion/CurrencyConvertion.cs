@@ -10,21 +10,20 @@ namespace WalutyBusinessLogic
         public string FirstNameCurrency { get; set; }
         public string SecondNameCurrency { get; set; }
 
-        public CurrencyConvertion(string firstNameCurrency ,
-            string secondNameCurrency)
+        public CurrencyConvertion(string firstNameCurrency, string secondNameCurrency)
         {
             FirstNameCurrency = firstNameCurrency;
             SecondNameCurrency = secondNameCurrency;
         }
 
-        public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency , int date)
+        public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency, int date)
         {
             CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency , date);
             CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency , date);
             return amountFirstCurrency * FirstDesiredCurrency.Close / SecondDesiredCurrency.Close;
         }
 
-        private CurrencyRecord GetDesiredCurrency(string nameCurrency , int date)
+        private CurrencyRecord GetDesiredCurrency(string nameCurrency, int date)
         {
             Loader loader = new Loader();
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
