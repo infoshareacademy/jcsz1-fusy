@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalutyConsoleApp", "WalutyConsoleApp\WalutyConsoleApp.csproj", "{CDED71FE-977D-48B4-B42E-750C12E48C79}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalutyBusinessLogic", "WalutyBusinessLogic\WalutyBusinessLogic.csproj", "{2276890E-C6AC-49A1-A593-C252FE28FDCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalutyMVCWebApp", "WalutyMVCWebApp\WalutyMVCWebApp.csproj", "{E5A82811-A896-49AF-A06F-A9BC3C338905}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalutyMVCWebApp", "WalutyMVCWebApp\WalutyMVCWebApp.csproj", "{E5A82811-A896-49AF-A06F-A9BC3C338905}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CDED71FE-977D-48B4-B42E-750C12E48C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDED71FE-977D-48B4-B42E-750C12E48C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDED71FE-977D-48B4-B42E-750C12E48C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDED71FE-977D-48B4-B42E-750C12E48C79}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2276890E-C6AC-49A1-A593-C252FE28FDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2276890E-C6AC-49A1-A593-C252FE28FDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2276890E-C6AC-49A1-A593-C252FE28FDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
