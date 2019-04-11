@@ -29,10 +29,6 @@ namespace WalutyMVCWebApp
             });
 
             services.AddSingleton<ILoader, Loader>();
-            
-            // multi-thread
-            // Task.Factory.StartNew(() => Loader.GetLoaderInstance());
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);           
         }
 
