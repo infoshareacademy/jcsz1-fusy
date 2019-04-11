@@ -7,8 +7,21 @@ namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader : ILoader
     {
+        private static Loader instance;
         private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
         private string Separator = ",";
+
+        private Loader()
+        {
+
+        }
+
+        public static Loader GetLoaderInstance()
+        {
+            if (instance == null)
+                instance = new Loader();
+            return instance;
+        }
 
         public Currency LoadCurrencyFromFile(string fileName)
         {

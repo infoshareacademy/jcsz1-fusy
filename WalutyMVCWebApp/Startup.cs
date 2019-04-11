@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WalutyBusinessLogic;
 using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyMVCWebApp
@@ -29,8 +28,13 @@ namespace WalutyMVCWebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddScoped<ILoader, Loader>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // REMOVED services.AddScoped<ILoader, Loader>();
+            services.AddSingleton<ILoader, Loader>();
+            
+            // multi-thread
+            // Task.Factory.StartNew(() => Loader.GetLoaderInstance());
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

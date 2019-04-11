@@ -7,7 +7,7 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 {
     public class CurrenciesComparator
     {
-        private readonly Loader loader = new Loader();
+        // REMOVED private readonly Loader loader = new Loader();
         public string FileExtension { get; set; }
 
         public CurrenciesComparator()
@@ -24,8 +24,8 @@ namespace WalutyBusinessLogic.CurrenciesComparision
         {
                 DateTime dateFromInt = DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
 
-                Currency firstCurrency = loader.LoadCurrencyFromFile(firstCurrencyCode + FileExtension);
-                Currency secondCurrency = loader.LoadCurrencyFromFile(secondCurrencyCode + FileExtension);
+                Currency firstCurrency = Loader.GetLoaderInstance().LoadCurrencyFromFile(firstCurrencyCode + FileExtension);
+                Currency secondCurrency = Loader.GetLoaderInstance().LoadCurrencyFromFile(secondCurrencyCode + FileExtension);
 
                 CurrencyRecord firstCurrencyRecord =
                     firstCurrency.ListOfRecords.Single(currency => currency.Date == date);
