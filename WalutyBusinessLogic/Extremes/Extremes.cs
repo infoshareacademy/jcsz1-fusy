@@ -9,7 +9,6 @@ namespace WalutyBusinessLogic.Extremes
         public ExtremeValue GetGlobalExtremes(string nameCurrency)
         {
             ExtremeValue extremeValue = new ExtremeValue();
-            // REMOVED Loader loader = new Loader();
             Currency currency = Loader.GetLoaderInstance().LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Max(c=> c.High);
@@ -20,7 +19,6 @@ namespace WalutyBusinessLogic.Extremes
         public ExtremeValue GetLocalExtremes(string nameCurrency, int startDate, int endDate)
         {
             ExtremeValue extremeValue = new ExtremeValue();
-            // REMOVED Loader loader = new Loader();
             Currency currency = Loader.GetLoaderInstance().LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate)

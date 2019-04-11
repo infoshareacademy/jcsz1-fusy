@@ -7,7 +7,6 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 {
     public class CurrenciesComparator
     {
-        // REMOVED private readonly Loader loader = new Loader();
         public string FileExtension { get; set; }
 
         public CurrenciesComparator()

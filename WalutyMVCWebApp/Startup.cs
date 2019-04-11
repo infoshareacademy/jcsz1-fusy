@@ -28,7 +28,6 @@ namespace WalutyMVCWebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // REMOVED services.AddScoped<ILoader, Loader>();
             services.AddSingleton<ILoader, Loader>();
             
             // multi-thread

@@ -25,7 +25,6 @@ namespace WalutyBusinessLogic
 
         private CurrencyRecord GetDesiredCurrency(string nameCurrency, int date)
         {
-            // REMOVED Loader loader = new Loader();
             Currency currency = Loader.GetLoaderInstance().LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             CurrencyRecord desiredRecord = listOfRecords.SingleOrDefault(record => record.Date == date);
