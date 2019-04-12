@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 
-namespace WalutyBusinessLogic
+namespace WalutyBusinessLogic.CurrencyConvertion
 {
     public class CurrencyConvertion
     {
         public string FirstNameCurrency { get; set; }
         public string SecondNameCurrency { get; set; }
 
-        public CurrencyConvertion(string firstNameCurrency, string secondNameCurrency)
+        private readonly ILoader _loader;
+
+        public CurrencyConvertion(ILoader loader, string firstNameCurrency, string secondNameCurrency)
         {
+            _loader = loader;
             FirstNameCurrency = firstNameCurrency;
             SecondNameCurrency = secondNameCurrency;
         }
 
         public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency, int date)
         {
-            CurrencyRecord FirstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency , date);
-            CurrencyRecord SecondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency , date);
-            return amountFirstCurrency * FirstDesiredCurrency.Close / SecondDesiredCurrency.Close;
+            CurrencyRecord firstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency, date);
+            CurrencyRecord secondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency, date);
+            return amountFirstCurrency * firstDesiredCurrency.Close / secondDesiredCurrency.Close;
         }
 
         private CurrencyRecord GetDesiredCurrency(string nameCurrency, int date)
         {
-            Currency currency = Loader.GetLoaderInstance().LoadCurrencyFromFile(nameCurrency);
+            Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             CurrencyRecord desiredRecord = listOfRecords.SingleOrDefault(record => record.Date == date);
-            return desiredRecord; 
+            return desiredRecord;
         }
     }
 }

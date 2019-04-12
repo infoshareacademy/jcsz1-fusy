@@ -7,20 +7,19 @@ namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader : ILoader
     {
-        private static Loader instance;
+        public List<Currency> AllCurrencies { get; set; }
         private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
         private string Separator = ",";
 
-        private Loader()
+        public void Init()
         {
+            if (AllCurrencies != null && AllCurrencies.Count > 0)
+            {
+                // Loader was already initialized.
+                return;
+            }
 
-        }
-
-        public static Loader GetLoaderInstance()
-        {
-            if (instance == null)
-                instance = new Loader();
-            return instance;
+            this.AllCurrencies = GetListOfAllCurrencies();
         }
 
         public Currency LoadCurrencyFromFile(string fileName)
@@ -33,7 +32,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
         {
             List<Currency> currencies = new List<Currency>();
 
-            foreach(string currencyFileName in GetAvailableTxtFileNames())
+            foreach (string currencyFileName in GetAvailableTxtFileNames())
             {
                 currencies.Add(LoadCurrencyFromFile(currencyFileName));
             }
@@ -42,30 +41,29 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         public List<string> GetAvailableTxtFileNames()
         {
-            string pathToDirectory = Path.Combine(Directory.GetParent
-                                                 (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName
-                                                 ,PathToDirectory);          
+            string pathToDirectory = GetCurrenciesFolderPath();
             string[] filePaths = Directory.GetFiles(pathToDirectory, "*.txt", SearchOption.TopDirectoryOnly);
             List<string> listOfFileNames = new List<string>();
 
-            foreach(string line in filePaths)
+            foreach (string line in filePaths)
             {
                 listOfFileNames.Add(Path.GetFileName(line));
             }
-           
+
             return listOfFileNames;
         }
 
-        private List<string> LoadLinesFromFile(string fileName) 
+        private string GetCurrenciesFolderPath()
         {
-            string pathToFile = PathToDirectory;
+            return Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, $"{PathToDirectory}");
+        }
+
+        private List<string> LoadLinesFromFile(string fileName)
+        {
             StreamReader streamReader;
             List<string> listOfLines = new List<string>();
 
-            pathToFile = Path.Combine(pathToFile, fileName);
-            pathToFile = Path.Combine(Directory.GetParent
-                                     (Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,
-                                      pathToFile);
+            var pathToFile = Path.Combine(GetCurrenciesFolderPath(), fileName);
 
             if (File.Exists(pathToFile))
             {
@@ -93,14 +91,13 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         private Currency GetCurrency(List<string> listOfLines)
         {
-            string[] splittedLine;
             Currency currency = new Currency();
 
-            for(int i = 0; i < listOfLines.Count; i++)
+            for (int i = 0; i < listOfLines.Count; i++)
             {
                 CurrencyRecord currencyRecord = new CurrencyRecord();
-                splittedLine = listOfLines[i].Split(Separator);
-          
+                var splittedLine = listOfLines[i].Split(Separator);
+
                 if (i == 0)
                 {
                     currency.Name = splittedLine[0];
@@ -108,13 +105,13 @@ namespace WalutyBusinessLogic.LoadingFromFile
                 try
                 {
                     currencyRecord.Date = Convert.ToInt32(splittedLine[1]);
-                    currencyRecord.Open = float.Parse(splittedLine[2].Replace(".",","));
+                    currencyRecord.Open = float.Parse(splittedLine[2].Replace(".", ","));
                     currencyRecord.High = float.Parse(splittedLine[3].Replace(".", ","));
                     currencyRecord.Low = float.Parse(splittedLine[4].Replace(".", ","));
                     currencyRecord.Close = float.Parse(splittedLine[5].Replace(".", ","));
                     currencyRecord.Volume = float.Parse(splittedLine[6].Replace(".", ","));
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine("error loading file at line: " + i);
                     Console.WriteLine(e.Message);
@@ -124,5 +121,5 @@ namespace WalutyBusinessLogic.LoadingFromFile
             return currency;
         }
     }
-    
+
 }

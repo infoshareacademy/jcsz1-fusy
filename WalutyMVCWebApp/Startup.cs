@@ -30,11 +30,13 @@ namespace WalutyMVCWebApp
 
             services.AddSingleton<ILoader, Loader>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.ApplicationServices.GetService<ILoader>().Init();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

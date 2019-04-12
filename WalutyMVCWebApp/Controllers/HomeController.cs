@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 
 namespace WalutyMVCWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILoader _loader;
+
+        public HomeController(ILoader loader)
+        {
+            _loader = loader;
+        }
         public IActionResult Index()
         {
+            var listOfAllCurrencies = _loader.AllCurrencies;
             return View();
         }
 
