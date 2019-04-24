@@ -2,16 +2,16 @@
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 
-namespace WalutyBusinessLogic.CurrencyConvertion
+namespace WalutyMVCWebApp.Services
 {
-    public class CurrencyConvertion
+    public class CurrencyConvertionServices
     {
         public string FirstNameCurrency { get; set; }
         public string SecondNameCurrency { get; set; }
 
         private readonly ILoader _loader;
 
-        public CurrencyConvertion(ILoader loader, string firstNameCurrency, string secondNameCurrency)
+        public CurrencyConvertionServices(ILoader loader, string firstNameCurrency, string secondNameCurrency)
         {
             _loader = loader;
             FirstNameCurrency = firstNameCurrency;
