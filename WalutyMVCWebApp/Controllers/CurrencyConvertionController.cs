@@ -1,16 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using WalutyBusinessLogic.LoadingFromFile;
+using WalutyMVCWebApp.Services;
 namespace WalutyMVCWebApp.Controllers
 {
     public class CurrencyConvertionController : Controller
     {
-        public IActionResult Index()
+        private readonly CurrencyConvertionServices _currencyConvertion;
+
+        public CurrencyConvertionController(ILoader loader, string  firstNameCurrency, string secondNameCurrency)
         {
-            return View();
+            _currencyConvertion = new CurrencyConvertionServices(loader, firstNameCurrency, secondNameCurrency);
+        }
+
+        public IActionResult Index(float amountFirstCurrency, int dateCurrency)
+        {
+            return View();//_currencyConvertion.CalculateAmountForCurrencyConvertion( amountFirstCurrency,  dateCurrency));
         }
     }
 }
