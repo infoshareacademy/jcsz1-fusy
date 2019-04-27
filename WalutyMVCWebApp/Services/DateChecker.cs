@@ -5,7 +5,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyMVCWebApp.Services
 {
-    public class DateChecker
+    public class DateChecker : IDateChecker
     {
         public int SetCorrectDateForCurrency(int dateCurrency, string nameCurrency)
         {
