@@ -8,14 +8,14 @@ namespace WalutyMVCWebApp.Controllers
     {
         private readonly CurrencyConvertionServices _currencyConvertion;
 
-        public CurrencyConvertionController(ILoader loader, string  firstNameCurrency, string secondNameCurrency)
-        {
-            _currencyConvertion = new CurrencyConvertionServices(loader, firstNameCurrency, secondNameCurrency);
-        }
+        //public CurrencyConvertionController(ILoader loader, string  firstNameCurrency, string secondNameCurrency)
+        //{
+        //    _currencyConvertion = new CurrencyConvertionServices(loader, firstNameCurrency, secondNameCurrency);
+        //}
 
-        public IActionResult Index(float amountFirstCurrency, int dateCurrency)
+        public IActionResult Index()
         {
-            return View();//_currencyConvertion.CalculateAmountForCurrencyConvertion( amountFirstCurrency,  dateCurrency));
+            return View();
         }
     }
 }
