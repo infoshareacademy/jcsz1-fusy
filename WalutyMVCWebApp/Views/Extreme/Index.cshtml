@@ -1,0 +1,21 @@
+﻿@using WalutyMVCWebApp.Services
+@using WalutyMVCWebApp.Models
+@model ExtremeValue
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h3>Globa extreme</h3>
+
+<div class="container">
+    <form asp-antiforgery="true" asp-controller="Extreme" asp-action="Index" method="post">
+        <div class="form-group">
+            <div class="form-control">
+                <label>Currency</label>
+                <input asp-action="nameCurrency"/>
+                @*<span asp-validation-for="nameCurrency" class="text-danger"></span>*@
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Show</button>
+    </form>
+</div>
