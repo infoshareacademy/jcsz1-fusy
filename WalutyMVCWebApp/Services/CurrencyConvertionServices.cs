@@ -4,7 +4,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyMVCWebApp.Services
 {
-    public class CurrencyConvertionServices
+    public class CurrencyConvertionServices : ICurrencyConvertionServices
     {
         public string FirstNameCurrency { get; set; }
         public string SecondNameCurrency { get; set; }
