@@ -9,7 +9,7 @@ namespace WalutyMVCWebApp.Services
     {
         public int SetCorrectDateForCurrency(int dateCurrency, string nameCurrency)
         {
-            List<CurrencyRecord> CurrencyDateList = GetCurrencyDateList(nameCurrency);
+            List<CurrencyRecord> CurrencyDateList = GetRecordDateList(nameCurrency);
             if (CurrencyDateList.Any(c => c.Date == dateCurrency))
             {
                 return dateCurrency;
@@ -20,13 +20,17 @@ namespace WalutyMVCWebApp.Services
         public int SetCorrectDateForTwoCurrencies(int dateCurrency, string firstNameCurrency,
             string secondNameCurrency)
         {
-            List<CurrencyRecord> FirstCurrencyDateList = GetCurrencyDateList(firstNameCurrency);
-            List<CurrencyRecord> SecondCurrencyDateList = GetCurrencyDateList(secondNameCurrency);
-            
+            List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
+            List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
+            if(FirstCurrencyRecordList.Any(c=> c.Date ==dateCurrency) 
+            && SecondCurrencyRecordList.Any(c=> c.Date == dateCurrency))
+            {
+                return dateCurrency;
+            }
             else return 0;
         }
 
-        private List<CurrencyRecord> GetCurrencyDateList(string nameCurrency)
+        private List<CurrencyRecord> GetRecordDateList(string nameCurrency)
         {
             Loader loader = new Loader();
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
