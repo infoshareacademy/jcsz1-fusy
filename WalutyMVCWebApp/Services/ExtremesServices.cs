@@ -5,11 +5,11 @@ using WalutyMVCWebApp.Models;
 
 namespace WalutyBusinessLogic.Extremes
 {
-    public class Extremes
+    public class ExtremesServices
     {
         private readonly ILoader _loader;
 
-        public Extremes(ILoader loader)
+        public ExtremesServices(ILoader loader)
         {
             _loader = loader;
         }

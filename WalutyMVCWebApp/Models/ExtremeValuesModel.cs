@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace WalutyBusinessLogic.Extremes
+namespace WalutyMVCWebApp.Models
 {
     public class ExtremeValue
     {
