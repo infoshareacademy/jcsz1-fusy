@@ -3,7 +3,7 @@ using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 
-namespace WalutyBusinessLogic.Extremes
+namespace WalutyMVCWebApp.Extremes
 {
     public class ExtremesServices
     {
