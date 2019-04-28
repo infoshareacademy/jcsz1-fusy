@@ -17,6 +17,11 @@ namespace WalutyMVCWebApp.Controllers
             return View();
         }
 
+        public IActionResult GlobalExtreme(string nameCurrency)
+        {
+            return View(_extremeServices.GetGlobalExtremes(nameCurrency));
+        }
+
         public IActionResult LocalExtreme()
         {
             return View();
