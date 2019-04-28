@@ -7,17 +7,17 @@ namespace WalutyMVCWebApp.Services
 {
     public class DateChecker : IDateChecker
     {
-        public int SetCorrectDateForCurrency(int dateCurrency, string nameCurrency)
+        public int? CheckeDateForCurrency(int dateCurrency, string nameCurrency)
         {
             List<CurrencyRecord> CurrencyDateList = GetRecordDateList(nameCurrency);
             if (CurrencyDateList.Any(c => c.Date == dateCurrency))
             {
                 return dateCurrency;
             }
-            else return 0;
+            else return null;
         }
 
-        public int SetCorrectDateForTwoCurrencies(int dateCurrency, string firstNameCurrency,
+        public int? CheckDateForTwoCurrencies(int dateCurrency, string firstNameCurrency,
             string secondNameCurrency)
         {
             List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
@@ -27,7 +27,7 @@ namespace WalutyMVCWebApp.Services
             {
                 return dateCurrency;
             }
-            else return 0;
+            else return null;
         }
 
         private List<CurrencyRecord> GetRecordDateList(string nameCurrency)
