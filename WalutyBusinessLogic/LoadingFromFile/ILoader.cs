@@ -11,6 +11,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
         void Init();
         List<Currency> AllCurrencies { get; set; }
         Currency LoadCurrencyFromFile(string fileName);
+        List<CurrencyInfo> LoadCurrencyInformation();
         List<Currency> GetListOfAllCurrencies();
         List<string> GetAvailableTxtFileNames();
     }

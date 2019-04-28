@@ -21,7 +21,7 @@ namespace WalutyMVCWebApp.Controllers
         public IActionResult Index(int? page, string searchString)
         {
             int pageNumber = page ?? 1;
-            IPagedList<string> listOfResults = null;
+            IPagedList<CurrencyInfo> listOfResults = null;
 
             if (!String.IsNullOrWhiteSpace(searchString))
             {
@@ -30,14 +30,14 @@ namespace WalutyMVCWebApp.Controllers
 
             if (ViewBag.searchFilter != null)
             {
-                listOfResults = _loader.GetAvailableTxtFileNames().Where(x => x.Contains(ViewBag.searchFilter)).Select(x => x.Split(".")[0]).ToPagedList(pageNumber, _pageSize);
+                listOfResults = _loader.LoadCurrencyInformation().Where(x => x.Code.Contains(ViewBag.searchFilter)).ToPagedList(pageNumber, _pageSize);
             }
             else
             {
-                listOfResults = _loader.GetAvailableTxtFileNames().Select(x => x.Split(".")[0]).ToPagedList(pageNumber, _pageSize);
+                listOfResults = _loader.LoadCurrencyInformation().ToPagedList(pageNumber, _pageSize);
             }
            
-            ViewBag.SinglePageOfCodes = listOfResults;
+            ViewBag.SinglePageOfCurrencyInfo = listOfResults;
 
             return View();
         }

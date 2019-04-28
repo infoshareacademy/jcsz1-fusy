@@ -12,7 +12,7 @@
 
 <form asp-controller="Home" asp-action="Index" method="get">
     <div class="md-form mt-0">
-        <input name="searchString" class="form-control" type="text" value="@ViewBag.searchFilter" placeholder="Search" aria-label="Search">
+        <input name="searchString" class="form-control" type="text" value="@ViewBag.searchFilter" placeholder="Search by code" aria-label="Search">
     </div>
 </form>
 <table class="table">
@@ -20,22 +20,23 @@
     <thead>
         <tr>
             <th scope="col">Currency code</th>
-            <th scope="col">Details</th>
+            <th scope="col">Full name</th>
         </tr>
         <tr></tr>
     </thead>
     <tbody>
-        @foreach (var currencyCode in ViewBag.SinglePageOfCodes)
+        @foreach (var currencyInfo in ViewBag.SinglePageOfCurrencyInfo)
         {
             <tr>
-                <td>@currencyCode</td>
-                <td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>
+                <td>@currencyInfo.Code</td>
+                <td>@currencyInfo.Name</td>
+                <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
             </tr>
         }
     </tbody>
 </table>
 
-@Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCodes, page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
+@Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo, page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
     new PagedListRenderOptions {
         LiElementClasses = new string[] { "page-item" },
         PageClasses = new string[] { "page-link" },
