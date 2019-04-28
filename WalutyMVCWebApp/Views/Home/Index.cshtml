@@ -1,7 +1,45 @@
-﻿@{
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Common
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
+
+
+<form asp-controller="Home" asp-action="Index" method="get">
+    <div class="md-form mt-0">
+        <input name="searchString" class="form-control" type="text" value="@ViewBag.searchFilter" placeholder="Search by code" aria-label="Search">
+    </div>
+</form>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Currency code</th>
+            <th scope="col">Full name</th>
+        </tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+        @foreach (var currencyInfo in ViewBag.SinglePageOfCurrencyInfo)
+        {
+            <tr>
+                <td>@currencyInfo.Code</td>
+                <td>@currencyInfo.Name</td>
+                <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo, page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
+    new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+        MaximumPageNumbersToDisplay = 5,
+        EllipsesFormat = ""
+    })

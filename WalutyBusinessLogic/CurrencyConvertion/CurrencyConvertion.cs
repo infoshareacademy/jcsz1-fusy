@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 
@@ -18,14 +19,14 @@ namespace WalutyBusinessLogic.CurrencyConvertion
             SecondNameCurrency = secondNameCurrency;
         }
 
-        public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency, int date)
+        public float CalculateAmountForCurrencyConvertion(float amountFirstCurrency, DateTime date)
         {
             CurrencyRecord firstDesiredCurrency = GetDesiredCurrency(FirstNameCurrency, date);
             CurrencyRecord secondDesiredCurrency = GetDesiredCurrency(SecondNameCurrency, date);
             return amountFirstCurrency * firstDesiredCurrency.Close / secondDesiredCurrency.Close;
         }
 
-        private CurrencyRecord GetDesiredCurrency(string nameCurrency, int date)
+        private CurrencyRecord GetDesiredCurrency(string nameCurrency, DateTime date)
         {
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;

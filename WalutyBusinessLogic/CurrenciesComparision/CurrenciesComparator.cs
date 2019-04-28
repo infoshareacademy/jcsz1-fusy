@@ -16,7 +16,7 @@ namespace WalutyBusinessLogic.CurrenciesComparision
             FileExtension = ".txt";
         }
 
-        public string CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, int date)
+        public string CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, DateTime date)
         {
             DateTime dateFromInt = DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
 
