@@ -24,12 +24,12 @@ namespace WalutyMVCWebApp.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult ShowResultCurrencyConvertion(ILoader loader, CurrencyConvertionModel currencyConvertionModel)
-        //{
-        //    var g = new CurrencyConvertionServices(loader,currencyConvertionModel.FirstCurrency, currencyConvertionModel.SecondCurrency);
-            
-        //    return View(g.CalculateAmountForCurrencyConvertion(currencyConvertionModel.AmountFirstCurrency, currencyConvertionModel.Date));
-        //}
+        [HttpPost]
+        public IActionResult ShowResultCurrencyConvertion(ILoader loader, CurrencyConvertionModel currencyConvertionModel)
+        {
+            var g = new CurrencyConvertionServices(loader, currencyConvertionModel.FirstCurrency, currencyConvertionModel.SecondCurrency);
+
+            return View(g.CalculateAmountForCurrencyConvertion(currencyConvertionModel.AmountFirstCurrency, currencyConvertionModel.Date));
+        }
     }
 }
