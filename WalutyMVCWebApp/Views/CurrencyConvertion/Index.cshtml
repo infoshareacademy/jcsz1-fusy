@@ -6,28 +6,28 @@
 <h1>Currency convertion</h1>
 <br/>
 
-<div class="container">
+@*<div class="container">
     <form asp-antiforgery="true" asp-controller="CurrencyConvertion" asp-action="Index" method="post">
         <div class="form-group">
             <div class="form-control">
                 <label>Date</label>
-                <input type="date" name="FirstCurrency" />
+                <input type="date" name="@Model.Date" />
             </div>
             <div class="form-control">
                 <label>First currency</label>
-                <input type="text" name="FirstCurrency" />
+                <input type="text" name="@Model.FirstCurrency" />
             </div>
             <div class="form-control">
                 <label>Second currency</label>
-                <input type="text" name="SecondCurrency" />
+                <input type="text" name="@Model.SecondCurrency" />
             </div>
             <div class="form-control">
                 <label>Amount currency</label>
-                <input type="number" name="AmountFirstCurrency" />
+                <input type="number" name="@Model.AmountFirstCurrency" />
             </div>
         </div>
         <button type="submit" class="btn btn-success">Show</button>
     </form>
 
     <output type="text" asp-action="GlobalExtreme"> </output>
-</div>
+</div>*@

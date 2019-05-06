@@ -25,7 +25,7 @@ namespace WalutyMVCWebApp.Extremes
             return extremeValue;
         }
 
-        public ExtremeValue GetLocalExtremes(string nameCurrency, int startDate, int endDate)
+        public ExtremeValue GetLocalExtremes(string nameCurrency, DateTime startDate, DateTime endDate)
         {
             ExtremeValue extremeValue = new ExtremeValue();
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);

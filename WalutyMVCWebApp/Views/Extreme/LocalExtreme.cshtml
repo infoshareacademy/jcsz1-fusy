@@ -1,32 +1,30 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
 <h1>Local extreme</h1>
 
 <div class="container">
-    <form asp-antiforgery="true" asp-controller="Extreme" asp-action="Index" method="post">
+    <form asp-controller="Extreme" asp-action="ShowLocalExtreme" method="post">
         <div class="form-group">
             <div class="form-control">
-                <label>Currency</label>
-                <input type="text" asp-action="nameCurrency" name="nameCurrency" />
+                <label>Currency </label>
+                <input type="text" name="nameCurrency" />
             </div>
         </div>
         <div class="form-group">
             <div class="form-control">
                 <label>Start date</label>
-                <input type="date" asp-action="nameCurrency" name="nameCurrency" />
+                <input type="date" name="startDate" />
             </div>
         </div>
         <div class="form-group">
             <div class="form-control">
                 <label>End date</label>
-                <input type="date" asp-action="nameCurrency" name="nameCurrency" />
+                <input type="date" name="endDate" />
             </div>
         </div>
         <button type="submit" class="btn btn-success">Show</button>
     </form>
-
-    <output type="text" asp-action="GlobalExtreme"> </output>
 </div>
+

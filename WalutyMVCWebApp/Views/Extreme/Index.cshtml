@@ -1,25 +1,20 @@
-﻿@using WalutyMVCWebApp.Services
-@using WalutyMVCWebApp.Models
-@model ExtremeValue
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
 <h3>Globa extreme</h3>
 <br/>
-Enter currency in textbox na click show
 <div class="container">
-    <form asp-antiforgery="true" asp-controller="Extreme" asp-action="Index" method="post">
+    <form asp-controller="Extreme" asp-action="GetGlobaExtreme" method="post">
         <div class="form-group">
             <div class="form-control">
                 <label>Currency</label>
-                <input type="text" asp-action="nameCurrency" name="nameCurrency"/>
+                <input type="text" name="currencyCode">
             </div>
         </div>
         <button type="submit" class="btn btn-success">Show</button>
     </form>
 
-    <output type="text" asp-action="GlobalExtreme" > </output>
 </div>
 
 
