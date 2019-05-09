@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
 
@@ -31,7 +32,8 @@ namespace WalutyMVCWebApp
             });
 
             services.AddSingleton<ILoader, Loader>();
-            services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer("DefaultConnection"));
+            services.AddSingleton<ICurrencyRepository, CurrencyRepository>();
+            services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
 {
-    class WalutyDBContext : AppContext
+    public class WalutyDBContext : DbContext
     {
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<CurrencyInfo> CurrencyInfos { get; set; }
+
+        public WalutyDBContext(DbContextOptions<WalutyDBContext> options) : base(options)
+        {
+
+        }
     }
 }
