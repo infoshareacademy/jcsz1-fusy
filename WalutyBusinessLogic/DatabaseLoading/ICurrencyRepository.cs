@@ -6,5 +6,7 @@ namespace WalutyBusinessLogic.DatabaseLoading
 {
     public interface ICurrencyRepository
     {
+        // Add Methods from Currency Repository
+
     }
 }
