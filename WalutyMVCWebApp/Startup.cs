@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
 
 namespace WalutyMVCWebApp
 {
@@ -25,10 +27,11 @@ namespace WalutyMVCWebApp
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.None;          
             });
 
             services.AddSingleton<ILoader, Loader>();
+            services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer("DefaultConnection"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }
@@ -48,6 +51,7 @@ namespace WalutyMVCWebApp
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.ApplicationServices.GetService<ILoader>().Init();
 
             app.UseMvc(routes =>
             {
