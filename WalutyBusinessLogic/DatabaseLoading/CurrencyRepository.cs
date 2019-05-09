@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using WalutyBusinessLogic.DatabaseLoading;
 
 namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
@@ -15,7 +13,20 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
             _walutyDBContext = walutyDBContext;
         }
 
-        // Copy Methods from Loader
-      
+        public List<Currency> GetAllCurrencies()
+        {
+            return _walutyDBContext.Currencies.ToList();
+        }
+
+        public List<CurrencyInfo> GetAllCurrencyInfo()
+        {
+            return _walutyDBContext.CurrencyInfos.ToList();
+        }
+
+        public Currency GetCurrency(string currencyCode)
+        {
+            return _walutyDBContext.Currencies.Single(x => x.Name.ToLower() == currencyCode.ToLower()); ;
+            throw new System.NotImplementedException();
+        }
     }
 }

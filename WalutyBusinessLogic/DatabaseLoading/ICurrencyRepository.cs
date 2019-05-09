@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyBusinessLogic.DatabaseLoading
 {
     public interface ICurrencyRepository
     {
-        // Add Methods from Currency Repository
-
+        List<Currency> GetAllCurrencies();
+        List<CurrencyInfo> GetAllCurrencyInfo();
+        Currency GetCurrency(string currencyCode);
+        
     }
 }
