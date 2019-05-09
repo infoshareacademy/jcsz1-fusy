@@ -22,12 +22,19 @@ namespace WalutyMVCWebApp
 
             using (var scope = hostBuilder.Services.CreateScope())
             {
-                var services = scope.ServiceProvider;
+                try
+                {
+                    var services = scope.ServiceProvider;
 
-                var context = services.GetRequiredService<WalutyDBContext>();
-                var loader = services.GetRequiredService<ILoader>();
+                    var context = services.GetRequiredService<WalutyDBContext>();
+                    var loader = services.GetRequiredService<ILoader>();
 
-                DBInitialization.InitialiseDB(context, loader);
+                    DBInitialization.InitialiseDB(context, loader);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Failed to initalise DB");
+                }
             }
 
             hostBuilder.Run();

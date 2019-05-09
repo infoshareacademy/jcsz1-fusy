@@ -6,7 +6,7 @@ using WalutyBusinessLogic.DatabaseLoading;
 
 namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
 {
-    public class CurrencyRepository :ICurrencyRepository
+    public class CurrencyRepository : ICurrencyRepository
     {
         private WalutyDBContext _walutyDBContext;
 
