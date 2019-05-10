@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Services;
 using WalutyMVCWebApp.Models;
@@ -8,28 +7,22 @@ namespace WalutyMVCWebApp.Controllers
 {
     public class CurrencyConvertionController : Controller
     {
-        private readonly CurrencyConvertionServices _currencyConvertion;
-        private readonly ILoader loader;
+        private readonly CurrencyConvertionService _currencyConvertionService;
 
-        //public CurrencyConvertionController(CurrencyConvertionServices currencyConvertionService)
-        //{
-        //    _currencyConvertion = currencyConvertionService;
-
-        //}
-
+        public CurrencyConvertionController(ILoader loader)
+        {
+            _currencyConvertionService = new CurrencyConvertionService(loader);
+        }
 
         public IActionResult Index()
         {
-            var currencyConvertionModel = new CurrencyConvertionModel();
             return View();
         }
 
         [HttpPost]
         public IActionResult ShowResultCurrencyConvertion(ILoader loader, CurrencyConvertionModel currencyConvertionModel)
         {
-            var g = new CurrencyConvertionServices(loader, currencyConvertionModel.FirstCurrency, currencyConvertionModel.SecondCurrency);
-
-            return View(g.CalculateAmountForCurrencyConvertion(currencyConvertionModel.AmountFirstCurrency, currencyConvertionModel.Date));
+            return View(_currencyConvertionService.CalculateAmountForCurrencyConvertion(currencyConvertionModel));
         }
     }
 }

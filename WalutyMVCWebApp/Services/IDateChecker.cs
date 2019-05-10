@@ -8,8 +8,8 @@ namespace WalutyMVCWebApp.Services
 {
     interface IDateChecker
     {
-        int? CheckeDateForCurrency(int dateCurrency, string nameCurrency);
-        int? CheckDateForTwoCurrencies(int dateCurrency, string firstNameCurrency,
+        DateTime? CheckeDateForCurrency(DateTime dateCurrency, string nameCurrency);
+        DateTime? CheckDateForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
            string secondNameCurrency);
     }
 }

@@ -20,8 +20,9 @@ namespace WalutyMVCWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetGlobaExtreme(string currencyCode)
-        {     
+        public IActionResult ShowGlobaExtreme(string currencyCode)
+        {
+            TempData["CurrentCurrencyCode"] = currencyCode;
             return View(_extremeServices.GetGlobalExtremes(currencyCode));
         }
 
@@ -31,9 +32,12 @@ namespace WalutyMVCWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShowLocalExtreme(string nameCurrency, DateTime startDate, DateTime endDate)
+        public IActionResult ShowLocalExtreme(string currencyCode, DateTime startDate, DateTime endDate)
         {
-            return View(_extremeServices.GetLocalExtremes(nameCurrency, startDate, endDate));
+            TempData["currencyCode"] = currencyCode;
+            TempData["startDate"] = startDate.Date;
+            TempData["endDate"] = endDate.Date;
+            return View(_extremeServices.GetLocalExtremes(currencyCode, startDate.Date, endDate.Date));
         }
     }
 }
