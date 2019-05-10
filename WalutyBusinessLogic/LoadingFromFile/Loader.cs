@@ -104,7 +104,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
                 }
                 try
                 {
-                    currencyRecord.Date = Convert.ToInt32(splittedLine[1]);
+                    currencyRecord.Date = DateTime.ParseExact(splittedLine[1], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                     currencyRecord.Open = float.Parse(splittedLine[2].Replace(".", ","));
                     currencyRecord.High = float.Parse(splittedLine[3].Replace(".", ","));
                     currencyRecord.Low = float.Parse(splittedLine[4].Replace(".", ","));

@@ -1,10 +1,11 @@
-﻿
+﻿using System;
+
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class CurrencyRecord
     {
-        public int Date { get; set; }
+        public DateTime Date { get; set; }
         public float Open { get; set; }
         public float High { get; set; }
         public float Low { get; set; }
