@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.DatabaseLoading;
 
@@ -26,7 +27,12 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
         public Currency GetCurrency(string currencyCode)
         {
             return _walutyDBContext.Currencies.Single(x => x.Name.ToLower() == currencyCode.ToLower()); ;
-            throw new System.NotImplementedException();
+        }
+
+        public List<CurrencyRecord> GetCurrencyRecordsBtwnDates(string currencyCode, DateTime begDate, DateTime endDate)
+        {
+            return _walutyDBContext.Currencies.Single(c => c.Name.ToLower() == currencyCode.ToLower())
+                    .ListOfRecords.Where(cr => cr.Date >= begDate && cr.Date <= endDate).ToList(); 
         }
     }
 }

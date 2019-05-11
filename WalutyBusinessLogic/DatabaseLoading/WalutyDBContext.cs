@@ -9,7 +9,6 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
 
         public WalutyDBContext(DbContextOptions<WalutyDBContext> options) : base(options)
         {
-
         }
     }
 }

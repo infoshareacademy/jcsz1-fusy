@@ -32,7 +32,7 @@ namespace WalutyMVCWebApp
             });
 
             services.AddSingleton<ILoader, Loader>();
-            services.AddSingleton<ICurrencyRepository, CurrencyRepository>();
+            services.AddTransient<ICurrencyRepository, CurrencyRepository>();
             services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
