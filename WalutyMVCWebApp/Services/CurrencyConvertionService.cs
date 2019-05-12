@@ -6,21 +6,30 @@ using WalutyMVCWebApp.Models;
 
 namespace WalutyMVCWebApp.Services
 {
-    public class CurrencyConvertionService 
+    public class CurrencyConvertionService : ICurrencyConvertionServices
     {
         private readonly ILoader _loader;
 
         public CurrencyConvertionService(ILoader loader)
         {
             _loader = loader;
-            CurrencyConvertionModel currencyConvertionModel = new CurrencyConvertionModel();
         }
 
-        public float CalculateAmountForCurrencyConvertion(CurrencyConvertionModel currencyConvertionModel)
+        public CurrencyConvertionModel CalculateAmountForCurrencyConvertion(DateTime date,
+            string firstCurrency, string secondCurrency, float amountFirstCurrency)
         {
-            CurrencyRecord firstDesiredCurrency = GetDesiredCurrency(currencyConvertionModel.FirstCurrency, currencyConvertionModel.Date);
-            CurrencyRecord secondDesiredCurrency = GetDesiredCurrency(currencyConvertionModel.SecondCurrency, currencyConvertionModel.Date);
-            return currencyConvertionModel.AmountFirstCurrency * firstDesiredCurrency.Close / secondDesiredCurrency.Close;
+            CurrencyConvertionModel currencyConvertionModel = new CurrencyConvertionModel();
+            currencyConvertionModel.FirstCurrency = firstCurrency;
+            currencyConvertionModel.SecondCurrency = secondCurrency;
+            currencyConvertionModel.Date = date;
+            currencyConvertionModel.AmountFirstCurrency = amountFirstCurrency;
+            firstCurrency += ".txt";
+            secondCurrency += ".txt";
+            CurrencyRecord firstDesiredCurrency = GetDesiredCurrency(firstCurrency, date);
+            CurrencyRecord secondDesiredCurrency = GetDesiredCurrency(secondCurrency, date);
+            currencyConvertionModel.AmountSecondCurrency = amountFirstCurrency * firstDesiredCurrency.Close / secondDesiredCurrency.Close;
+            return currencyConvertionModel;
+            
         }
 
         private CurrencyRecord GetDesiredCurrency(string nameCurrency, DateTime date)
