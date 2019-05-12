@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.Models.Services;
 
-namespace WalutyMVCWebApp
+namespace WalutyBusinessLogic.Models
 {
     public class Startup
     {
@@ -29,6 +30,7 @@ namespace WalutyMVCWebApp
             });
 
             services.AddSingleton<ILoader, Loader>();
+            services.AddSingleton<IDateChecker, DateChecker>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Waluty NBP</title>
-    <link href="css\leftpane.css" rel="stylesheet">
+    <link href="~/css/leftpane.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,23 +27,24 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-area="" asp-controller="CurrencyConvertion" asp-action="Index">
                                 <span data-feather="file"></span>
-                                Temp 1
+                                Currency Convertion
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-area="" asp-controller="Extreme" asp-action="Index">
                                 <span data-feather="shopping-cart"></span>
-                                Temp 2
+                                Global Extreme
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" asp-area="" asp-controller="Extreme" asp-action="LocalExtreme">
                                 <span data-feather="users"></span>
-                                Temp 3
+                                Local Extreme
                             </a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="bar-chart-2"></span>

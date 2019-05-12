@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<h1>Local extreme</h1>
+
+<div class="container">
+    <form asp-controller="Extreme" asp-action="ShowLocalExtreme" method="post">
+        <div class="form-group">
+            <div class="form-control">
+                <label>Currency </label>
+                <input type="text" name="currencyCode" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-control">
+                <label>Start date</label>
+                <input type="date" name="startDate" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-control">
+                <label>End date</label>
+                <input type="date" name="endDate" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Show</button>
+    </form>
+</div>
+
