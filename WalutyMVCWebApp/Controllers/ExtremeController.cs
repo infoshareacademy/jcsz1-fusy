@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyMVCWebApp.Extremes;
+using WalutyBusinessLogic.Models.Extremes;
 
-namespace WalutyMVCWebApp.Controllers
+namespace WalutyBusinessLogic.Models.Controllers
 {
     public class ExtremeController : Controller
     {

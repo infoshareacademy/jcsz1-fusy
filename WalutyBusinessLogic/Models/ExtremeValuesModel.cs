@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WalutyMVCWebApp.Models
+namespace WalutyBusinessLogic.Models
 {
     public class ExtremeValue
     {

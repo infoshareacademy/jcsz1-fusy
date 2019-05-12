@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WalutyBusinessLogic.LoadingFromFile;
 
-namespace WalutyMVCWebApp.Services
+namespace WalutyBusinessLogic.Models.Services
 {
-    interface IDateChecker
+    public interface IDateChecker
     {
         DateTime? CheckeDateForCurrency(DateTime dateCurrency, string nameCurrency);
         DateTime? CheckDateForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,

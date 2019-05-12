@@ -1,5 +1,5 @@
 ﻿using System;
-using WalutyMVCWebApp.Models;
+using WalutyBusinessLogic.Models;
 
 namespace WalutyMVCWebApp.Services
 {

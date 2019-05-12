@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyMVCWebApp.Services;
+using WalutyBusinessLogic.Models.Services;
 
-namespace WalutyMVCWebApp
+namespace WalutyBusinessLogic.Models
 {
     public class Startup
     {

@@ -104,7 +104,8 @@ namespace WalutyBusinessLogic.LoadingFromFile
                 }
                 try
                 {
-                    currencyRecord.Date = DateTime.ParseExact(splittedLine[1], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+
+                    currencyRecord.Date = currencyRecord.Date = DateTime.ParseExact(splittedLine[1], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
                     currencyRecord.Open = float.Parse(splittedLine[2].Replace(".", ","));
                     currencyRecord.High = float.Parse(splittedLine[3].Replace(".", ","));
                     currencyRecord.Low = float.Parse(splittedLine[4].Replace(".", ","));
@@ -119,6 +120,42 @@ namespace WalutyBusinessLogic.LoadingFromFile
                 currency.ListOfRecords.Add(currencyRecord);
             }
             return currency;
+        }
+
+        public List<CurrencyInfo> LoadCurrencyInformation()
+        {
+            List<string> currenciesFilesNames = GetAvailableTxtFileNames();
+            List<CurrencyInfo> infoToReturn = new List<CurrencyInfo>();
+
+            foreach(string currencyFileName in currenciesFilesNames)
+            {
+                StreamReader streamReader;
+
+                var pathToFile = Path.Combine(GetCurrenciesFolderPath(), "omeganbp.lst");
+
+                if (File.Exists(pathToFile))
+                {
+                    streamReader = File.OpenText(pathToFile);
+                }
+                else
+                {
+                    throw new FileLoadException();
+                }
+
+                while (!streamReader.EndOfStream)
+                {
+                    var line = streamReader.ReadLine();
+
+                    if (line.Contains(currencyFileName))
+                    {
+                        infoToReturn.Add(new CurrencyInfo(
+                            line.Split(currencyFileName)[1].Trim(),
+                            currencyFileName.Split(".")[0]));
+                        break;
+                    } 
+                }
+            }
+            return infoToReturn;
         }
     }
 

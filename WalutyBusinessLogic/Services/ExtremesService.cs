@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyMVCWebApp.Models;
-using WalutyMVCWebApp.Services;
+using WalutyBusinessLogic.Models.Services;
 
-namespace WalutyMVCWebApp.Extremes
+namespace WalutyBusinessLogic.Models.Extremes
 {
     public class ExtremesServices : IExtremeService
     {

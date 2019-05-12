@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 
-namespace WalutyMVCWebApp.Services
+namespace WalutyBusinessLogic.Models.Services
 {
     public class DateChecker : IDateChecker
     {

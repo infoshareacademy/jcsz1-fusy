@@ -1,7 +1,7 @@
 ﻿using System;
-using WalutyMVCWebApp.Models;
+using WalutyBusinessLogic.Models;
 
-namespace WalutyMVCWebApp.Services
+namespace WalutyBusinessLogic.Models.Services
 {
     public interface IExtremeService
     {

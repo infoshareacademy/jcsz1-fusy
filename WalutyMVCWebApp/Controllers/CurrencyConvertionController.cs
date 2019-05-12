@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyMVCWebApp.Services;
+using WalutyBusinessLogic.Models.Services;
 using System;
 
-namespace WalutyMVCWebApp.Controllers
+namespace WalutyBusinessLogic.Models.Controllers
 {
     public class CurrencyConvertionController : Controller
     {

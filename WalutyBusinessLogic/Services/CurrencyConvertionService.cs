@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyMVCWebApp.Models;
+using WalutyMVCWebApp.Services;
 
-namespace WalutyMVCWebApp.Services
+namespace WalutyBusinessLogic.Models.Services
 {
     public class CurrencyConvertionService : ICurrencyConvertionServices
     {
