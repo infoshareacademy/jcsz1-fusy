@@ -8,7 +8,6 @@ namespace WalutyMVCWebApp.Controllers
     public class ExtremeController : Controller
     {
         private readonly ExtremesServices _extremeServices;
-
         public ExtremeController(ILoader loader)
         {
             _extremeServices = new ExtremesServices(loader);
@@ -22,7 +21,6 @@ namespace WalutyMVCWebApp.Controllers
         [HttpPost]
         public IActionResult ShowGlobaExtreme(string currencyCode)
         {
-            TempData["CurrentCurrencyCode"] = currencyCode;
             return View(_extremeServices.GetGlobalExtremes(currencyCode));
         }
 
@@ -34,9 +32,6 @@ namespace WalutyMVCWebApp.Controllers
         [HttpPost]
         public IActionResult ShowLocalExtreme(string currencyCode, DateTime startDate, DateTime endDate)
         {
-            TempData["currencyCode"] = currencyCode;
-            TempData["startDate"] = startDate.Date;
-            TempData["endDate"] = endDate.Date;
             return View(_extremeServices.GetLocalExtremes(currencyCode, startDate.Date, endDate.Date));
         }
     }

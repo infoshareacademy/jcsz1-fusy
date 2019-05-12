@@ -18,8 +18,9 @@ namespace WalutyMVCWebApp.Extremes
 
         public ExtremeValue GetGlobalExtremes(string nameCurrency)
         {
-            nameCurrency += ".txt";
             ExtremeValue extremeValue = new ExtremeValue();
+            extremeValue.NameCurrency = nameCurrency;
+            nameCurrency += ".txt";
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Max(c => c.High);
@@ -29,8 +30,11 @@ namespace WalutyMVCWebApp.Extremes
 
         public ExtremeValue GetLocalExtremes(string nameCurrency, DateTime startDate, DateTime endDate)
         {
-            nameCurrency += ".txt";
             ExtremeValue extremeValue = new ExtremeValue();
+            extremeValue.NameCurrency = nameCurrency;
+            nameCurrency += ".txt";
+            extremeValue.StartDate = startDate;
+            extremeValue.EndDate = endDate;
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate)
