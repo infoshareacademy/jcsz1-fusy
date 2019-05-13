@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Currency

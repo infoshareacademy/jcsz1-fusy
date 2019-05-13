@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyBusinessLogic.Models.Extremes;
+using WalutyBusinessLogic.Services;
 using WalutyBusinessLogic.Models;
 
-namespace WalutyBusinessLogic.Models.Controllers
+namespace WalutyMVCWebApp.Controllers
 {
     public class ExtremeController : Controller
     {
@@ -20,8 +19,13 @@ namespace WalutyBusinessLogic.Models.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ShowGlobaExtreme(ExtremeValue extremeValue)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Index");
+            }
             return View(_extremeServices.GetGlobalExtremes(extremeValue));
         }
 
@@ -33,11 +37,11 @@ namespace WalutyBusinessLogic.Models.Controllers
         [HttpPost]
         public IActionResult ShowLocalExtreme(ExtremeValue extremeValue)
         {
-            //if (!ModelState.IsValid)
-            //{
-              return View(_extremeServices.GetLocalExtremes(extremeValue));
-            //}
-            //return View("LocalExtreme");
+            if (!ModelState.IsValid)
+            {
+                return View("LocalExtreme");
+            }
+            return View(_extremeServices.GetLocalExtremes(extremeValue));
         }
     }
 }

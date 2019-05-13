@@ -6,7 +6,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 using X.PagedList;
 
-namespace WalutyBusinessLogic.Models.Controllers
+namespace WalutyMVCWebApp.Controllers
 {
     public class HomeController : Controller
     {

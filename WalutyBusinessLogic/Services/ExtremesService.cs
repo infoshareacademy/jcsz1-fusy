@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyBusinessLogic.Models.Services;
+using WalutyBusinessLogic.Models;
 
-namespace WalutyBusinessLogic.Models.Extremes
+namespace WalutyBusinessLogic.Services
 {
     public class ExtremesServices : IExtremeService
     {
@@ -17,7 +16,7 @@ namespace WalutyBusinessLogic.Models.Extremes
 
         public ExtremeValue GetGlobalExtremes(ExtremeValue extremeValue)
         {
-            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);            
+            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
             extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
             extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
             return extremeValue;

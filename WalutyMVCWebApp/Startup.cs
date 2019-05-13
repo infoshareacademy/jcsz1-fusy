@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyBusinessLogic.Models.Services;
+using WalutyBusinessLogic.Services;
 
 namespace WalutyBusinessLogic.Models
 {

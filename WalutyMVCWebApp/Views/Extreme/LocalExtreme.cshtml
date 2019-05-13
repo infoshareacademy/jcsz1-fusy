@@ -1,4 +1,5 @@
-﻿@*
+﻿@model WalutyBusinessLogic.Models.ExtremeValue
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
@@ -9,19 +10,22 @@
         <div class="form-group">
             <div class="form-control">
                 <label>Currency </label>
-                <input type="text" name="nameCurrency" />
+                <input type="text" name="NameCurrency"/>
+                <span asp-validation-for="NameCurrency" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <div class="form-control">
                 <label>Start date</label>
-                <input type="date" name="startDate" />
+                <input type="date" name="startDate"/>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <div class="form-control">
                 <label>End date</label>
-                <input type="date" name="endDate" />
+                <input type="date" name="endDate"/>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
         </div>
         <button type="submit" class="btn btn-success">Show</button>

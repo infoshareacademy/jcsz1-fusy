@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 
-
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader : ILoader

@@ -1,7 +1,6 @@
-﻿using System;
-using WalutyBusinessLogic.Models;
+﻿using WalutyBusinessLogic.Models;
 
-namespace WalutyBusinessLogic.Models.Services
+namespace WalutyBusinessLogic.Services
 {
     public interface IExtremeService
     {
