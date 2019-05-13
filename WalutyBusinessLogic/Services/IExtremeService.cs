@@ -5,7 +5,7 @@ namespace WalutyBusinessLogic.Models.Services
 {
     public interface IExtremeService
     {
-         ExtremeValue GetGlobalExtremes(string nameCurrency);
-         ExtremeValue GetLocalExtremes(string nameCurrency, DateTime startDate, DateTime endDate);
+         ExtremeValue GetGlobalExtremes(ExtremeValue extremeValue);
+         ExtremeValue GetLocalExtremes(ExtremeValue extremeValue);
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Models.Extremes;
+using WalutyBusinessLogic.Models;
 
 namespace WalutyBusinessLogic.Models.Controllers
 {
@@ -19,9 +20,9 @@ namespace WalutyBusinessLogic.Models.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShowGlobaExtreme(string currencyCode)
+        public IActionResult ShowGlobaExtreme(ExtremeValue extremeValue)
         {
-            return View(_extremeServices.GetGlobalExtremes(currencyCode));
+            return View(_extremeServices.GetGlobalExtremes(extremeValue));
         }
 
         public IActionResult LocalExtreme()
@@ -30,9 +31,13 @@ namespace WalutyBusinessLogic.Models.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShowLocalExtreme(string currencyCode, DateTime startDate, DateTime endDate)
+        public IActionResult ShowLocalExtreme(ExtremeValue extremeValue)
         {
-            return View(_extremeServices.GetLocalExtremes(currencyCode, startDate.Date, endDate.Date));
+            //if (!ModelState.IsValid)
+            //{
+              return View(_extremeServices.GetLocalExtremes(extremeValue));
+            //}
+            //return View("LocalExtreme");
         }
     }
 }
