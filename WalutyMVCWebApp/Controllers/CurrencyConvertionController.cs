@@ -19,10 +19,9 @@ namespace WalutyBusinessLogic.Models.Controllers
         }
 
         [HttpPost]
-        public IActionResult ShowResultCurrencyConvertion(DateTime dateCurrency, 
-        string firstCurrency, string secondCurrency, float amountFirstCurrency)
+        public IActionResult ShowResultCurrencyConvertion(CurrencyConvertionModel currencyConvertionModel)
         {
-            return View(_currencyConvertionService.CalculateAmountForCurrencyConvertion(dateCurrency, firstCurrency, secondCurrency, amountFirstCurrency));
+            return View(_currencyConvertionService.CalculateAmountForCurrencyConvertion(currencyConvertionModel));
         }
     }
 }

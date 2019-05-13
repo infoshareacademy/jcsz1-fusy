@@ -1,5 +1,5 @@
 ﻿using System;
-
+//asp validation file
 namespace WalutyBusinessLogic.Models
 {
     public class CurrencyConvertionModel
