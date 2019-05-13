@@ -9,6 +9,6 @@ namespace WalutyBusinessLogic.DatabaseLoading
         List<Currency> GetAllCurrencies();
         List<CurrencyInfo> GetAllCurrencyInfo();
         Currency GetCurrency(string currencyCode);
-        List<CurrencyRecord> GetCurrencyBetweenDates(string currencyCode, DateTime begDate, DateTime endDate);
+        List<CurrencyRecord> GetCurrencyRecordsBtwnDates(string currencyCode, DateTime begDate, DateTime endDate);
     }
 }

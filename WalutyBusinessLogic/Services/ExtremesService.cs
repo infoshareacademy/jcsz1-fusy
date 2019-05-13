@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.Models.Services;
 
-namespace WalutyBusinessLogic.Extremes
+namespace WalutyBusinessLogic.Models.Extremes
 {
-    public class Extremes
+    public class ExtremesServices : IExtremeService
     {
         private readonly ILoader _loader;
 
-        public Extremes(ILoader loader)
+        public ExtremesServices(ILoader loader)
         {
             _loader = loader;
         }
@@ -17,6 +18,8 @@ namespace WalutyBusinessLogic.Extremes
         public ExtremeValue GetGlobalExtremes(string nameCurrency)
         {
             ExtremeValue extremeValue = new ExtremeValue();
+            extremeValue.NameCurrency = nameCurrency;
+            nameCurrency += ".txt";
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Max(c => c.High);
@@ -27,6 +30,10 @@ namespace WalutyBusinessLogic.Extremes
         public ExtremeValue GetLocalExtremes(string nameCurrency, DateTime startDate, DateTime endDate)
         {
             ExtremeValue extremeValue = new ExtremeValue();
+            extremeValue.NameCurrency = nameCurrency;
+            nameCurrency += ".txt";
+            extremeValue.StartDate = startDate;
+            extremeValue.EndDate = endDate;
             Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate)

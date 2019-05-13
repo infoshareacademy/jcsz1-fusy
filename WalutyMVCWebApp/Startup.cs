@@ -9,8 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
+using WalutyBusinessLogic.Models.Services;
 
-namespace WalutyMVCWebApp
+namespace WalutyBusinessLogic.Models
 {
     public class Startup
     {
@@ -34,6 +35,7 @@ namespace WalutyMVCWebApp
             services.AddSingleton<ILoader, Loader>();
             services.AddTransient<ICurrencyRepository, CurrencyRepository>();
             services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSingleton<IDateChecker, DateChecker>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
         }

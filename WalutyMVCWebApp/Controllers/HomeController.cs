@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq;
@@ -7,7 +6,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 using X.PagedList;
 
-namespace WalutyMVCWebApp.Controllers
+namespace WalutyBusinessLogic.Models.Controllers
 {
     public class HomeController : Controller
     {
