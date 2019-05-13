@@ -5,10 +5,10 @@ using WalutyBusinessLogic.Services;
 
 namespace WalutyMVCWebApp.Controllers
 {
-    public class CurrencyConversionController : Controller
+    public class CurrencyController : Controller
     {
         private readonly CurrencyConversionService _currencyConversionService;
-        public CurrencyConversionController(ILoader loader)
+        public CurrencyController(ILoader loader)
         {
             _currencyConversionService = new CurrencyConversionService(loader);
         }
@@ -28,5 +28,7 @@ namespace WalutyMVCWebApp.Controllers
             }
             return View(_currencyConversionService.CalculateAmountForCurrencyConversion(currencyConversionModel));
         }
+
+       
     }
 }
