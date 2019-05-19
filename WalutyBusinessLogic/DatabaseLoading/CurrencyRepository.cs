@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WalutyBusinessLogic.DatabaseLoading;
 using X.PagedList;
 
@@ -8,52 +10,54 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
 {
     public class CurrencyRepository : ICurrencyRepository
     {
-        private WalutyDBContext _walutyDBContext;
+        private readonly WalutyDBContext _walutyDBContext;
 
         public CurrencyRepository(WalutyDBContext walutyDBContext)
         {
             _walutyDBContext = walutyDBContext;
         }
 
-        public List<Currency> GetAllCurrencies()
+        public async Task<List<Currency>>GetAllCurrencies()
         {
-            return _walutyDBContext.Currencies.ToList();
+            return await _walutyDBContext.Currencies.ToListAsync();
         }
 
-        public IPagedList<Currency> GetAllCurrencies(int pageSize, int pageNumber)
+        public async Task<IPagedList<Currency>> GetAllCurrencies(int pageSize, int pageNumber)
         {
-            throw new NotImplementedException();
+            return await _walutyDBContext.Currencies.ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public IPagedList<Currency> GetAllCurrencies(int pageSize, int pageNumber, string filter)
+        public async Task<IPagedList<Currency>> GetAllCurrencies(int pageSize, int pageNumber, string filter)
         {
-            throw new NotImplementedException();
+            return await _walutyDBContext.Currencies
+                                         .Where(x => x.Name.ToLower().Contains(filter.ToLower()))
+                                         .ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public List<CurrencyInfo> GetAllCurrencyInfo()
+        public async Task<List<CurrencyInfo>> GetAllCurrencyInfo()
         {
-            return _walutyDBContext.CurrencyInfos.ToList();
+            return await _walutyDBContext.CurrencyInfos.ToListAsync();
         }
 
-        public IPagedList<CurrencyInfo> GetAllCurrencyInfo(int pageSize, int pageNumber)
+        public async Task<IPagedList<CurrencyInfo>> GetAllCurrencyInfo(int pageSize, int pageNumber)
         {
-            return _walutyDBContext.CurrencyInfos.ToPagedList(pageNumber, pageSize);
+            return await _walutyDBContext.CurrencyInfos.ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public IPagedList<CurrencyInfo> GetAllCurrencyInfo(int pageSize, int pageNumber, string filter)
+        public async Task<IPagedList<CurrencyInfo>> GetAllCurrencyInfo(int pageSize, int pageNumber, string filter)
         {
-            return _walutyDBContext.CurrencyInfos.Where(x => x.Code.Contains(filter.ToUpper())).ToPagedList(pageNumber, pageSize);
+            return await _walutyDBContext.CurrencyInfos.Where(x => x.Code.Contains(filter.ToUpper())).ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public Currency GetCurrency(string currencyCode)
+        public async Task<Currency> GetCurrency(string currencyCode)
         {
-            return _walutyDBContext.Currencies.Single(x => x.Name.ToLower() == currencyCode.ToLower()); ;
+            return await _walutyDBContext.Currencies.SingleAsync(x => x.Name.ToLower() == currencyCode.ToLower()); ;
         }
 
-        public List<CurrencyRecord> GetCurrencyRecordsBtwnDates(string currencyCode, DateTime begDate, DateTime endDate)
+        public async Task<List<CurrencyRecord>> GetCurrencyRecordsBtwnDates(string currencyCode, DateTime begDate, DateTime endDate)
         {
-            return _walutyDBContext.Currencies.Single(c => c.Name.ToLower() == currencyCode.ToLower())
-                    .ListOfRecords.Where(cr => cr.Date >= begDate && cr.Date <= endDate).ToList(); 
+            return await _walutyDBContext.Currencies.Single(c => c.Name.ToLower() == currencyCode.ToLower())
+                    .ListOfRecords.Where(cr => cr.Date >= begDate && cr.Date <= endDate).ToListAsync(); 
         }
     }
 }
