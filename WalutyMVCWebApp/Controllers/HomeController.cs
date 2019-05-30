@@ -6,6 +6,7 @@ using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 using X.PagedList;
 using WalutyBusinessLogic.DatabaseLoading;
+using System.Threading.Tasks;
 
 namespace WalutyBusinessLogic.Models.Controllers
 {
@@ -37,8 +38,8 @@ namespace WalutyBusinessLogic.Models.Controllers
             }
             else
             {
-                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber);
-                //listOfResults = _loader.LoadCurrencyInformation().ToPagedList(pageNumber, _pageSize);
+                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber).Result;
+                //listOfResults = .LoadCurrencyInformation().ToPagedList(pageNumber, _pageSize);
             }
            
             ViewBag.SinglePageOfCurrencyInfo = listOfResults;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WalutyBusinessLogic.Models
 {
-    class User : IdentityUser
+    public class User : IdentityUser
     {
     }
 }
