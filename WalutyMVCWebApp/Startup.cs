@@ -34,7 +34,9 @@ namespace WalutyBusinessLogic.Models
 
             services.AddSingleton<ILoader, Loader>();
             services.AddTransient<ICurrencyRepository, CurrencyRepository>();
-            services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
+            services.AddDbContext<WalutyDBContext>(opt =>
+                opt.UseInMemoryDatabase("Development"));
+            //services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddSingleton<IDateChecker, DateChecker>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
