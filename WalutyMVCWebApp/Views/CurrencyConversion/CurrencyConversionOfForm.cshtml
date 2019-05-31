@@ -7,26 +7,30 @@
 <h1>Currency conversion</h1>
 <br/>
 <div class="container">
-        <form asp-controller="Currency" asp-action="ShowResultCurrencyConversion" method="post">
+        <form asp-controller="CurrencyConversion" asp-action="ShowResultCurrencyConversion" method="post">
             <div class="form-group">
                 <div class="form-control">
                     <label>Date</label>
-                    <input type="date" name="date"/>
+                    <input type="date" asp-for="Date" name="Date" />
                     <span asp-validation-for="Date" class="text-danger"></span>
+                    @if (ViewBag.DateRangeForConversion != null)
+                    {
+                        <span class="text-danger">@ViewBag.DateRangeForConversion</span>
+                    }
                 </div>
                 <div class="form-control">
                     <label>First currency</label>
-                    <input type="text" name="firstCurrency"/>
+                    <input type="text" asp-for="FirstCurrency" name="FirstCurrency"/>
                     <span asp-validation-for="FirstCurrency" class="text-danger"></span>
                 </div>
                 <div class="form-control">
                     <label>Second currency</label>
-                    <input type="text" name="secondCurrency"/>
+                    <input type="text" asp-for="SecondCurrency" name="SecondCurrency"/>
                     <span asp-validation-for="SecondCurrency" class="text-danger"></span>
                 </div>
                 <div class="form-control">
                     <label>Amount currency</label>
-                    <input type="number" name="amountFirstCurrency"/>
+                    <input type="number" asp-for="AmountFirstCurrency" name="AmountFirstCurrency"/>
                     <span asp-validation-for="AmountFirstCurrency" class="text-danger"></span>
                 </div>
             </div>
