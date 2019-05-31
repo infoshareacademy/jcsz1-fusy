@@ -13,16 +13,20 @@
                     <label>Date</label>
                     <input type="date" asp-for="Date" name="Date" />
                     <span asp-validation-for="Date" class="text-danger"></span>
-                    <span class="text-danger">@ViewBag.DateRangeForConversion</span>
+                    @if (ViewBag.DateRangeForConversion != null)
+                    {
+                        <span class="text-danger">@ViewBag.DateRangeForConversion</span>
+                    }
                 </div>
                 <div class="form-control">
                     <label>First currency</label>
                     <input type="text" asp-for="FirstCurrency" name="FirstCurrency" />
+
                     <span asp-validation-for="FirstCurrency" class="text-danger"></span>
-                    @*//@if (ViewBag.ResultChekingCurrencyNameInConversion != null)*@
-                    
+                    @if (ViewBag.ResultChekingCurrencyNameInConversion != null)
+                    { 
                         <span class="text-danger">@ViewBag.ResultChekingCurrencyNameInConversion</span>
-                    
+                    }
                 </div>
                 <div class="form-control">
                     <label>Second currency</label>
