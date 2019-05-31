@@ -11,15 +11,17 @@ namespace WalutyMVCWebApp.Controllers
         private readonly CurrenciesComparator _currenciesComparator;
         private readonly DateChecker _dateChecker;
         private readonly DateRange _dateRange;
+        private readonly CurrencyNameChecker _currencyNameChecker;
 
         public CurrencyComparisionController(ILoader loader)
         {
             _currenciesComparator = new CurrenciesComparator(loader);
             _dateChecker = new DateChecker();
             _dateRange = new DateRange(loader);
+            _currencyNameChecker = new CurrencyNameChecker();
         }
 
-        public IActionResult CurrencyComparatorOfForm()
+        public IActionResult FormOfCurrencyComparator()
         {
             return View();
         }
@@ -30,13 +32,18 @@ namespace WalutyMVCWebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("CurrencyComparatorOfForm", model);
+                return View("FormOfCurrencyComparator", model);
+            }
+            if (!_currencyNameChecker.CheckingIfCurrenciesIsDifferent(model.FirstCurrencyCode, model.SecondCurrencyCode))
+            {
+                ViewBag.ResultChekingCurrencyNameInComparision = "Currencies name must different";
+                return View("FormOfCurrencyComparator", model);
             }
             if (!_dateChecker.CheckingIfDateExistsForTwoCurrencies(model.Date, model.FirstCurrencyCode, model.SecondCurrencyCode))
             {
                 ViewBag.DateRangeForComparison = _dateRange.GetDateRangeTwoCurrencies(model.FirstCurrencyCode, model.SecondCurrencyCode);
                 
-                return View("CurrencyComparatorOfForm", model);
+                return View("FormOfCurrencyComparator", model);
             }
             return View(_currenciesComparator.CompareCurrencies(model));
         }
