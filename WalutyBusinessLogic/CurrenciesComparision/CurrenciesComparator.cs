@@ -19,8 +19,6 @@ namespace WalutyBusinessLogic.CurrenciesComparision
 
         public CurrenciesComparatorModel CompareCurrencies(CurrenciesComparatorModel model)
         {
-            model.Date = DateTime.ParseExact(model.Date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
-
             Currency firstCurrency = _loader.LoadCurrencyFromFile(model.FirstCurrencyCode + FileExtension);
             Currency secondCurrency = _loader.LoadCurrencyFromFile(model.SecondCurrencyCode + FileExtension);
 
