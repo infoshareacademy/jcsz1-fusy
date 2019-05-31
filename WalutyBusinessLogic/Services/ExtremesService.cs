@@ -5,7 +5,7 @@ using WalutyBusinessLogic.Models;
 
 namespace WalutyBusinessLogic.Services
 {
-    public class ExtremesServices //: IExtremeService
+    public class ExtremesServices : IExtremeService
     {
         private readonly ILoader _loader;
 
