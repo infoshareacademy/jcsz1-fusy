@@ -3,6 +3,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class CurrencyRecord
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public float Open { get; set; }
         public float High { get; set; }
