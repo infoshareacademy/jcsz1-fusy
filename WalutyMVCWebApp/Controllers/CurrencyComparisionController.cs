@@ -28,14 +28,14 @@ namespace WalutyMVCWebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ShowResultCurrencyComparision(CurrenciesComparatorModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("CurrencyComparatorOfForm", model);
+            }
             if (!_dateChecker.CheckingIfDateExistsForTwoCurrencies(model.Date, model.FirstCurrencyCode, model.SecondCurrencyCode))
             {
                 ViewBag.DateRangeForComparison = _dateRange.GetDateRangeTwoCurrencies(model.FirstCurrencyCode, model.SecondCurrencyCode);
                 
-                return View("CurrencyComparatorOfForm", model);
-            }
-            if (!ModelState.IsValid)
-            {
                 return View("CurrencyComparatorOfForm", model);
             }
             return View(_currenciesComparator.CompareCurrencies(model));

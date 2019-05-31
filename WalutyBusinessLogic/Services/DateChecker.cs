@@ -20,8 +20,6 @@ namespace WalutyBusinessLogic.Services
         public bool CheckingIfDateExistsForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
             string secondNameCurrency)
         {
-            firstNameCurrency += ".txt";
-            secondNameCurrency += ".txt";
             List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
             List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
             if(FirstCurrencyRecordList.Any(c=> c.Date == dateCurrency) 
@@ -35,6 +33,7 @@ namespace WalutyBusinessLogic.Services
         private List<CurrencyRecord> GetRecordDateList(string nameCurrency)
         {
             Loader loader = new Loader();
+            nameCurrency += ".txt";
             Currency currency = loader.LoadCurrencyFromFile(nameCurrency);
             List<CurrencyRecord> CurrencyDateList = currency.ListOfRecords;
             return CurrencyDateList;

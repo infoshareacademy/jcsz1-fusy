@@ -18,8 +18,9 @@ namespace WalutyBusinessLogic.Services
             List<CurrencyRecord> listOfRecords = GetCurrencyList(currencyCode);
             DateTime FirstDateCurrency = listOfRecords.FirstOrDefault().Date;
             DateTime LastDateCurrency= listOfRecords.LastOrDefault().Date;
-            string dateRangeResult = $"{currencyCode} exist in this app from {FirstDateCurrency} to {LastDateCurrency}"
-                + ". Without weekends and holidays";
+            string dateRangeResult = $"{currencyCode} exist in this app from {FirstDateCurrency.ToShortDateString()} " +
+                $"to {LastDateCurrency.ToShortDateString()}. Without weekends and holidays";
+
             return dateRangeResult;
         }
 
