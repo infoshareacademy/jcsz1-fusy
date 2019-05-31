@@ -5,7 +5,7 @@ using WalutyBusinessLogic.Models;
 
 namespace WalutyBusinessLogic.Services
 {
-    public class ExtremesServices : IExtremeService
+    public class ExtremesServices //: IExtremeService
     {
         private readonly ILoader _loader;
 
@@ -14,7 +14,7 @@ namespace WalutyBusinessLogic.Services
             _loader = loader;
         }
 
-        public ExtremeValue GetGlobalExtremes(ExtremeValue extremeValue)
+        public GlobalExtremeValueModel GetGlobalExtremes(GlobalExtremeValueModel extremeValue)
         {
             List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
             extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
@@ -22,7 +22,7 @@ namespace WalutyBusinessLogic.Services
             return extremeValue;
         }
 
-        public ExtremeValue GetLocalExtremes(ExtremeValue extremeValue)
+        public LocalExtremeValueModel GetLocalExtremes(LocalExtremeValueModel extremeValue)
         {
             List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
             extremeValue.MaxValue = ListOfRecords.Where
