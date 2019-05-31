@@ -7,27 +7,29 @@ namespace WalutyBusinessLogic.Services
 {
     public class DateChecker : IDateChecker
     {
-        public DateTime? CheckeDateForCurrency(DateTime dateCurrency, string nameCurrency)
+        public bool CheckingIfDateExists(DateTime dateCurrency, string nameCurrency)
         {
             List<CurrencyRecord> CurrencyDateList = GetRecordDateList(nameCurrency);
             if (CurrencyDateList.Any(c => c.Date == dateCurrency))
             {
-                return dateCurrency;
+                return true;
             }
-            else return null;
+            else return false;
         }
 
-        public DateTime? CheckDateForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
+        public bool CheckingIfDateExistsForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
             string secondNameCurrency)
         {
+            firstNameCurrency += ".txt";
+            secondNameCurrency += ".txt";
             List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
             List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
-            if(FirstCurrencyRecordList.Any(c=> c.Date ==dateCurrency) 
-            && SecondCurrencyRecordList.Any(c=> c.Date == dateCurrency))
+            if(FirstCurrencyRecordList.Any(c=> c.Date == dateCurrency) 
+            && (SecondCurrencyRecordList.Any(c=> c.Date == dateCurrency)))
             {
-                return dateCurrency;
+                return true;
             }
-            else return null;
+            else return false;
         }
 
         private List<CurrencyRecord> GetRecordDateList(string nameCurrency)
