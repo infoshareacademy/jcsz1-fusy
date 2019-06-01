@@ -31,7 +31,7 @@ namespace WalutyBusinessLogic.Models
 
                     DBInitialization.InitialiseDB(context, loader);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("Failed to initalise DB");
                 }
