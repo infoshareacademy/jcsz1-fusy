@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 using X.PagedList;
@@ -37,7 +36,7 @@ namespace WalutyMVCWebApp.Controllers
             }
             else
             {
-                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber);
+                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber).Result;
                 //listOfResults = _loader.LoadCurrencyInformation().ToPagedList(pageNumber, _pageSize);
             }
            

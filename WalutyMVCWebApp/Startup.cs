@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
-using WalutyBusinessLogic.Models.Services;
-
+using WalutyBusinessLogic.Services;
 
 namespace WalutyBusinessLogic.Models
 {
