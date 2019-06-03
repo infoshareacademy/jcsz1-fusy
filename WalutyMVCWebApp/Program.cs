@@ -12,7 +12,7 @@ using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
 
-namespace WalutyBusinessLogic.Models
+namespace WalutyMVCWebApp
 {
     public class Program
     {
