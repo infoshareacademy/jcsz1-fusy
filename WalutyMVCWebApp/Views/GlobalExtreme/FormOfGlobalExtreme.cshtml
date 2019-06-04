@@ -1,20 +1,22 @@
-﻿@*
+﻿@model WalutyBusinessLogic.Models.GlobalExtremeValueModel
+@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+    asp validation message
 *@
 
 <h3>Globa extreme</h3>
 <br/>
 <div class="container">
-    <form asp-controller="Extreme" asp-action="ShowGlobaExtreme" method="post">
+    <form asp-controller="GlobalExtreme" asp-action="ShowGlobaExtreme" method="post">
         <div class="form-group">
             <div class="form-control">
                 <label>Currency</label>
-                <input type="text" name="currencyCode">
+                <input type="text" asp-for="NameCurrency" name="NameCurrency">
+                <span asp-validation-for="NameCurrency" class="text-danger"></span>
             </div>
         </div>
         <button type="submit" class="btn btn-success">Show</button>
     </form>
-
 </div>
 
 
