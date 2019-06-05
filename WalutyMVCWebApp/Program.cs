@@ -5,7 +5,7 @@ using System;
 using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 
-namespace WalutyBusinessLogic.Models
+namespace WalutyMVCWebApp
 {
     public class Program
     {

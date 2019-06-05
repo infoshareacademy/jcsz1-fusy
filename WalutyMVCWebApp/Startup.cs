@@ -10,8 +10,8 @@ using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
 using WalutyBusinessLogic.Services;
 
-namespace WalutyBusinessLogic.Models
-{
+namespace WalutyMVCWebApp
+{ 
     public class Startup
     {
         public Startup(IConfiguration configuration)

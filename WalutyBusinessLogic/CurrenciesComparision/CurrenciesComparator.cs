@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.Models;
 
 namespace WalutyBusinessLogic.CurrenciesComparision
 {
@@ -16,30 +17,23 @@ namespace WalutyBusinessLogic.CurrenciesComparision
             FileExtension = ".txt";
         }
 
-        public string CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, DateTime date)
+        public CurrenciesComparatorModel CompareCurrencies(CurrenciesComparatorModel model)
         {
-            DateTime dateFromInt = DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
-
-            Currency firstCurrency = _loader.LoadCurrencyFromFile(firstCurrencyCode + FileExtension);
-            Currency secondCurrency = _loader.LoadCurrencyFromFile(secondCurrencyCode + FileExtension);
+            Currency firstCurrency = _loader.LoadCurrencyFromFile(model.FirstCurrencyCode + FileExtension);
+            Currency secondCurrency = _loader.LoadCurrencyFromFile(model.SecondCurrencyCode + FileExtension);
 
             CurrencyRecord firstCurrencyRecord =
-                firstCurrency.ListOfRecords.Single(currency => currency.Date == date);
+                firstCurrency.ListOfRecords.Single(currency => currency.Date == model.Date);
             CurrencyRecord secondCurrencyRecord =
-                secondCurrency.ListOfRecords.Single(currency => currency.Date == date);
+                secondCurrency.ListOfRecords.Single(currency => currency.Date == model.Date);
 
             float firstCloseValue = firstCurrencyRecord.Close;
             float secondCloseValue = secondCurrencyRecord.Close;
 
             float comparision = firstCloseValue / secondCloseValue;
 
-            return $"In day {dateFromInt.ToShortDateString()} {firstCurrency.Name} is worth {comparision} {secondCurrency.Name}";
+            model.ComparatorResult = $"In day {model.Date.ToShortDateString()} {firstCurrency.Name} is worth {comparision} {secondCurrency.Name}";
+            return model;
         }
-        // ...
-        // CompareCurrencies(string firstCurrencyCode, string secondCurrencyCode, int date) usage example:
-
-        //CurrenciesComparator currencies = new CurrenciesComparator();
-        //Console.WriteLine(currencies.CompareCurrencies("GBP", "EUR", 20141010));
-        //Console.ReadKey();
     }
 }

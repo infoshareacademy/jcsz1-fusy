@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
-using WalutyBusinessLogic.Models.Services;
+using WalutyBusinessLogic.Models;
 
-namespace WalutyBusinessLogic.Models.Extremes
+namespace WalutyBusinessLogic.Services
 {
-    public class ExtremesServices : IExtremeService
+    public class ExtremesServices
     {
         private readonly ILoader _loader;
 
@@ -15,32 +14,32 @@ namespace WalutyBusinessLogic.Models.Extremes
             _loader = loader;
         }
 
-        public ExtremeValue GetGlobalExtremes(string nameCurrency)
+        public GlobalExtremeValueModel GetGlobalExtremes(GlobalExtremeValueModel extremeValue)
         {
-            ExtremeValue extremeValue = new ExtremeValue();
-            extremeValue.NameCurrency = nameCurrency;
-            nameCurrency += ".txt";
-            Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
-            List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
-            extremeValue.MaxValue = listOfRecords.Max(c => c.High);
-            extremeValue.MinValue = listOfRecords.Min(c => c.Low);
+            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
+            extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
+            extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
             return extremeValue;
         }
 
-        public ExtremeValue GetLocalExtremes(string nameCurrency, DateTime startDate, DateTime endDate)
+        public LocalExtremeValueModel GetLocalExtremes(LocalExtremeValueModel extremeValue)
         {
-            ExtremeValue extremeValue = new ExtremeValue();
-            extremeValue.NameCurrency = nameCurrency;
-            nameCurrency += ".txt";
-            extremeValue.StartDate = startDate;
-            extremeValue.EndDate = endDate;
-            Currency currency = _loader.LoadCurrencyFromFile(nameCurrency);
-            List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
-            extremeValue.MaxValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate)
+            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
+            extremeValue.MaxValue = ListOfRecords.Where
+                (c => c.Date >= extremeValue.StartDate && c.Date <= extremeValue.EndDate)
                 .Max(c => c.High);
-            extremeValue.MinValue = listOfRecords.Where(c => c.Date >= startDate && c.Date <= endDate)
+            extremeValue.MinValue = ListOfRecords.Where
+                (c => c.Date >= extremeValue.StartDate && c.Date <= extremeValue.EndDate)
                 .Min(c => c.Low);
             return extremeValue;
+        }
+
+        private List<CurrencyRecord> GetCurrencyList(string codeCurrency)
+        {
+            codeCurrency += ".txt";
+            Currency currency = _loader.LoadCurrencyFromFile(codeCurrency);
+            List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
+            return listOfRecords;
         }
     }
 }
