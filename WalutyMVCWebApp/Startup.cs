@@ -56,7 +56,7 @@ namespace WalutyBusinessLogic.Models
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.ApplicationServices.GetService<ILoader>().Init();
-            // app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
