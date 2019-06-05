@@ -17,7 +17,7 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
             _walutyDBContext = walutyDBContext;
         }
 
-        public async Task<List<Currency>>GetAllCurrencies()
+        public async Task<List<Currency>> GetAllCurrencies()
         {
             return await _walutyDBContext.Currencies.ToListAsync();
         }
@@ -57,7 +57,7 @@ namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
         public async Task<List<CurrencyRecord>> GetCurrencyRecordsBtwnDates(string currencyCode, DateTime begDate, DateTime endDate)
         {
             return await _walutyDBContext.Currencies.Single(c => c.Name.ToLower() == currencyCode.ToLower())
-                    .ListOfRecords.Where(cr => cr.Date >= begDate && cr.Date <= endDate).ToListAsync(); 
+                    .ListOfRecords.Where(cr => cr.Date >= begDate && cr.Date <= endDate).ToListAsync();
         }
     }
 }

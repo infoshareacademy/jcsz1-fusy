@@ -1,8 +1,5 @@
 ﻿using System;
 
-
-using System;
-
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class CurrencyRecord

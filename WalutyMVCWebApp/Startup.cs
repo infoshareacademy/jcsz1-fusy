@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.LoadingFromFile.DatabaseLoading;
-using WalutyBusinessLogic.Models.Services;
+using WalutyBusinessLogic.Services;
 
 namespace WalutyBusinessLogic.Models
 {
@@ -29,7 +28,7 @@ namespace WalutyBusinessLogic.Models
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;          
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddSingleton<ILoader, Loader>();
@@ -38,8 +37,7 @@ namespace WalutyBusinessLogic.Models
                 opt.UseInMemoryDatabase("Development"));
             //services.AddDbContext<WalutyDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddSingleton<IDateChecker, DateChecker>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +56,7 @@ namespace WalutyBusinessLogic.Models
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.ApplicationServices.GetService<ILoader>().Init();
-            app.UseAuthentication();
-
+            // app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
