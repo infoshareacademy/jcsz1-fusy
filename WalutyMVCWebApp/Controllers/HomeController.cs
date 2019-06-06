@@ -1,10 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyMVCWebApp.Models;
 using X.PagedList;
-using WalutyBusinessLogic.DatabaseLoading;
 
 namespace WalutyMVCWebApp.Controllers
 {
@@ -31,7 +31,7 @@ namespace WalutyMVCWebApp.Controllers
 
             if (ViewBag.searchFilter != null)
             {
-                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber, ViewBag.searchFilter);
+                listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber, ViewBag.searchFilter).Result;
                 //listOfResults = _loader.LoadCurrencyInformation().Where(x => x.Code.Contains(ViewBag.searchFilter)).ToPagedList(pageNumber, _pageSize);
             }
             else
@@ -39,7 +39,7 @@ namespace WalutyMVCWebApp.Controllers
                 listOfResults = _repository.GetAllCurrencyInfo(_pageSize, pageNumber).Result;
                 //listOfResults = _loader.LoadCurrencyInformation().ToPagedList(pageNumber, _pageSize);
             }
-           
+
             ViewBag.SinglePageOfCurrencyInfo = listOfResults;
 
             return View();

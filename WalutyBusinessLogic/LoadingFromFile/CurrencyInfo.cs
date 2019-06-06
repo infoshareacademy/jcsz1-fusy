@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WalutyBusinessLogic.LoadingFromFile
+﻿namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class CurrencyInfo
     {

@@ -27,16 +27,17 @@
     <tbody>
         @foreach (var currencyInfo in ViewBag.SinglePageOfCurrencyInfo)
         {
-            <tr>
-                <td>@currencyInfo.Code</td>
-                <td>@currencyInfo.Name</td>
-                <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
-            </tr>
+        <tr>
+            <td>@currencyInfo.Code</td>
+            <td>@currencyInfo.Name</td>
+            <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
+        </tr>
         }
     </tbody>
 </table>
 
-@Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo, page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
+@Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo,
+    page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
     new PagedListRenderOptions {
         LiElementClasses = new string[] { "page-item" },
         PageClasses = new string[] { "page-link" },

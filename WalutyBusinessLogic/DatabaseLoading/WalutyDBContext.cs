@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.Models;
 
-namespace WalutyBusinessLogic.LoadingFromFile.DatabaseLoading
+namespace WalutyBusinessLogic.DatabaseLoading
 {
-    public class WalutyDBContext : DbContext
+    public class WalutyDBContext : IdentityDbContext<User> // DbContext 
     {
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<CurrencyInfo> CurrencyInfos { get; set; }

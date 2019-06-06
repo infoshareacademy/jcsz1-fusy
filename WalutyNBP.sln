@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalutyBusinessLogic", "WalutyBusinessLogic\WalutyBusinessLogic.csproj", "{2276890E-C6AC-49A1-A593-C252FE28FDCF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalutyMVCWebApp", "WalutyMVCWebApp\WalutyMVCWebApp.csproj", "{E5A82811-A896-49AF-A06F-A9BC3C338905}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2276890E-C6AC-49A1-A593-C252FE28FDCF} = {2276890E-C6AC-49A1-A593-C252FE28FDCF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
