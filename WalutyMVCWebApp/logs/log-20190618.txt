@@ -1,0 +1,5 @@
+2019-06-18 22:37:09.362 +02:00 [Information] Starting web host
+2019-06-18 22:37:10.185 +02:00 [Information] User entered
+2019-06-18 22:37:12.667 +02:00 [Information] User entered
+2019-06-18 22:37:12.891 +02:00 [Information] User entered
+2019-06-18 22:37:13.319 +02:00 [Information] User entered

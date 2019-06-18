@@ -15,7 +15,15 @@ namespace WalutyMVCWebApp
 
         public static int Main(string[] args)
         {
-           var hostBuilder = CreateWebHostBuilder(args).Build();
+           var hostBuilder = CreateWebHostBuilder(args).Build();          
+
+            Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Debug()
+           .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+           .Enrich.FromLogContext()
+           // Need to delete ISS information from logger
+           .WriteTo.RollingFile("./logs/log-{Date}.txt")
+           .CreateLogger();
 
             using (var scope = hostBuilder.Services.CreateScope())
             {
@@ -30,17 +38,9 @@ namespace WalutyMVCWebApp
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Failed to initalise DB");
+                    Log.Fatal("Failed to initalise DB");
                 }
             }
-
-            Log.Logger = new LoggerConfiguration()
-           .MinimumLevel.Debug()
-           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-           .Enrich.FromLogContext()
-           .WriteTo.Console()
-           .WriteTo.RollingFile("./logs/log-{Date}.txt")
-           .CreateLogger();
 
             try
             {
