@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Diagnostics;
 using WalutyBusinessLogic.DatabaseLoading;
@@ -21,6 +22,7 @@ namespace WalutyMVCWebApp.Controllers
         }
         public IActionResult Index(int? page, string searchString)
         {
+            Log.Information("User entered");
             int pageNumber = page ?? 1;
             IPagedList<CurrencyInfo> listOfResults = null;
 

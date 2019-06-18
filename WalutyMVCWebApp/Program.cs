@@ -34,20 +34,18 @@ namespace WalutyMVCWebApp
                 }
             }
 
-            hostBuilder.Run();
-
             Log.Logger = new LoggerConfiguration()
            .MinimumLevel.Debug()
            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
            .Enrich.FromLogContext()
            .WriteTo.Console()
-           .WriteTo.RollingFile("./logged/log-{Date}.txt")
+           .WriteTo.RollingFile("./logs/log-{Date}.txt")
            .CreateLogger();
 
             try
             {
                 Log.Information("Starting web host");
-                CreateWebHostBuilder(args).Build().Run();
+                hostBuilder.Run();
                 return 0;
             }
             catch (Exception ex)
