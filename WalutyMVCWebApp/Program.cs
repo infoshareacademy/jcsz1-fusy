@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 using System;
 using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
@@ -11,7 +12,8 @@ namespace WalutyMVCWebApp
 {
     public class Program
     {
-        public static void Main(string[] args)
+
+        public static int Main(string[] args)
         {
            var hostBuilder = CreateWebHostBuilder(args).Build();
 
@@ -33,14 +35,35 @@ namespace WalutyMVCWebApp
             }
 
             hostBuilder.Run();
+
+            Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Debug()
+           .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+           .Enrich.FromLogContext()
+           .WriteTo.Console()
+           .WriteTo.RollingFile("./logged/log-{Date}.txt")
+           .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting web host");
+                CreateWebHostBuilder(args).Build().Run();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+                return 1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging((hostingContext, config) =>
-            {
-                config.ClearProviders();
-            })
-            .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseSerilog();
     }
 }
