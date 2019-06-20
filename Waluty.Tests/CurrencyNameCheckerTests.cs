@@ -3,10 +3,10 @@ using Xunit;
 
 namespace Waluty.Tests
 {
-    public class ServicesTests
+    public class CurrencyNameCheckerTests
     {
         [Fact]
-        public void CurrencyNameChecker_Check_If_Two_Different_Names_Are_Equal()
+        public void CurrencyNameChecker_Check_If_Two_Different_Currency_Names_Are_Equal()
         {
             //Arrange
             CurrencyNameChecker nameChecker = new CurrencyNameChecker();
@@ -24,7 +24,7 @@ namespace Waluty.Tests
         }
 
         [Fact]
-        public void CurrencyNameChecker_Check_If_Two_Same_Names_Are_Equal()
+        public void CurrencyNameChecker_Check_If_Two_Same_Currency_Names_Are_Equal()
         {
             //Arrange
             CurrencyNameChecker nameChecker = new CurrencyNameChecker();
