@@ -21,7 +21,6 @@ namespace WalutyMVCWebApp
            .MinimumLevel.Debug()
            .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
            .Enrich.FromLogContext()
-           // Need to delete ISS information from logger
            .WriteTo.RollingFile("./logs/log-{Date}.txt")
            .CreateLogger();
 
