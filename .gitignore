@@ -37,6 +37,7 @@ artifacts/
 
 bin/
 obj/
+logs/
 
 # ReSharper is a .NET coding add-in
 _ReSharper*/
