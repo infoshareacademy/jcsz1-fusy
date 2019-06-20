@@ -22,7 +22,6 @@ namespace WalutyMVCWebApp.Controllers
         }
         public IActionResult Index(int? page, string searchString)
         {
-            Log.Information("User entered");
             int pageNumber = page ?? 1;
             IPagedList<CurrencyInfo> listOfResults = null;
 
