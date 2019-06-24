@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WalutyBusinessLogic.Models;
+using Serilog;
 
 namespace WalutyMVCWebApp.Areas.Identity.Pages.Account
 {
@@ -77,7 +78,7 @@ namespace WalutyMVCWebApp.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    Log.Logger.Information($"User {Input.Email} logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -86,11 +87,12 @@ namespace WalutyMVCWebApp.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    Log.Logger.Warning($"User {Input.Email} has locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
+                    Log.Logger.Warning($"User {Input.Email} had invalid login attempt");
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
                 }
