@@ -6,7 +6,7 @@ namespace Waluty.Tests
     public class CurrencyNameCheckerTests
     {
         [Fact]
-        public void CurrencyNameChecker_Check_If_Two_Different_Currency_Names_Are_Equal()
+        public void CurrencyNameChecker_Check_If_Two_Different_Currency_Names_Are_Not_Equal()
         {
             //Arrange
             CurrencyNameChecker nameChecker = new CurrencyNameChecker();
@@ -15,12 +15,10 @@ namespace Waluty.Tests
             bool result;
 
             //Act
-
-            result = nameChecker.CheckingIfCurrenciesIsDifferent(firstCurrencyName, secondCurrencyName);
+            result = nameChecker.CheckingIfCurrencyNamesAreDifferent(firstCurrencyName, secondCurrencyName);
 
             //Asert
             Assert.True(result);
-
         }
 
         [Fact]
@@ -33,12 +31,10 @@ namespace Waluty.Tests
             bool result;
 
             //Act
-
-            result = nameChecker.CheckingIfCurrenciesIsDifferent(firstCurrencyName, secondCurrencyName);
+            result = nameChecker.CheckingIfCurrencyNamesAreDifferent(firstCurrencyName, secondCurrencyName);
 
             //Asert
             Assert.False(result);
-
         }
     }
 }

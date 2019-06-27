@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Serilog;
 using System;
 using System.Diagnostics;
 using WalutyBusinessLogic.DatabaseLoading;
