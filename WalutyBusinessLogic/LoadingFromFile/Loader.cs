@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Security.Policy;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader : ILoader
     {
         public List<Currency> AllCurrencies { get; set; }
-        //private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
-        private string PathToDirectory = @"netcoreapp2.2\LoadingFromFile\FilesToLoad\omeganbp";
+        private string PathToDirectory = @"LoadingFromFile\FilesToLoad\omeganbp";
+        //private string PathToDirectory = @"netcoreapp2.2\LoadingFromFile\FilesToLoad\omeganbp";
+        string pathh = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private string Separator = ",";
 
         public void Init()
@@ -55,7 +58,15 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         private string GetCurrenciesFolderPath()
         {
-            return Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, $"{PathToDirectory}");
+            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            var path1 = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+            
+
+            string startupPath = Environment.CurrentDirectory;
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+
+            return Path.Combine(pathh, $"{PathToDirectory}");
         }
 
         private List<string> LoadLinesFromFile(string fileName)
