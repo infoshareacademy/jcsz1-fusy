@@ -9,13 +9,9 @@ namespace Waluty.Tests.Services
     {
         private MockRepository mockRepository;
 
-
-
         public DateCheckerTests()
         {
             this.mockRepository = new MockRepository(MockBehavior.Strict);
-
-
         }
 
         public void Dispose()

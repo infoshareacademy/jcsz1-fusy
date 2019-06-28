@@ -33,7 +33,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
         {
             List<Currency> currencies = new List<Currency>();
 
-            foreach (string currencyFileName in GetAvailableTxtFileNames())
+            foreach(string currencyFileName in GetAvailableTxtFileNames())
             {
                 currencies.Add(LoadCurrencyFromFile(currencyFileName));
             }
@@ -159,5 +159,4 @@ namespace WalutyBusinessLogic.LoadingFromFile
             return infoToReturn;
         }
     }
-
 }
