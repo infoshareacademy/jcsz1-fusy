@@ -30,4 +30,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="LoadingFromFile\FilesToLoad\omeganbp\AUD.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LoadingFromFile\FilesToLoad\omeganbp\USD.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

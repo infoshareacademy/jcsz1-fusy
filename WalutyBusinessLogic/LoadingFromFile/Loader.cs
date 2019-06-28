@@ -7,7 +7,8 @@ namespace WalutyBusinessLogic.LoadingFromFile
     public class Loader : ILoader
     {
         public List<Currency> AllCurrencies { get; set; }
-        private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
+        //private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
+        private string PathToDirectory = @"netcoreapp2.2\LoadingFromFile\FilesToLoad\omeganbp";
         private string Separator = ",";
 
         public void Init()
@@ -126,7 +127,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
             List<string> currenciesFilesNames = GetAvailableTxtFileNames();
             List<CurrencyInfo> infoToReturn = new List<CurrencyInfo>();
 
-            foreach(string currencyFileName in currenciesFilesNames)
+            foreach (string currencyFileName in currenciesFilesNames)
             {
                 StreamReader streamReader;
 
@@ -151,7 +152,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
                             line.Split(currencyFileName)[1].Trim(),
                             currencyFileName.Split(".")[0]));
                         break;
-                    } 
+                    }
                 }
             }
             return infoToReturn;
