@@ -32,7 +32,7 @@ namespace WalutyMVCWebApp.Controllers
             {
                 return View("FormOfCurrencyConversion", model);
             }
-            if (!_currencyNameChecker.CheckingIfCurrenciesIsDifferent(model.FirstCurrency, model.SecondCurrency))
+            if (!_currencyNameChecker.CheckingIfCurrencyNamesAreDifferent(model.FirstCurrency, model.SecondCurrency))
             {
                 ViewBag.ResultChekingCurrencyNameInConversion = "Currencies name must different";
                 return View("FormOfCurrencyConversion", model);
