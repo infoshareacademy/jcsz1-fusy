@@ -34,7 +34,7 @@ namespace WalutyMVCWebApp.Controllers
             {
                 return View("FormOfCurrencyComparator", model);
             }
-            if (!_currencyNameChecker.CheckingIfCurrenciesIsDifferent(model.FirstCurrencyCode, model.SecondCurrencyCode))
+            if (!_currencyNameChecker.CheckingIfCurrencyNamesAreDifferent(model.FirstCurrencyCode, model.SecondCurrencyCode))
             {
                 ViewBag.ResultChekingCurrencyNameInComparision = "Currencies name must different";
                 return View("FormOfCurrencyComparator", model);
