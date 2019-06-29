@@ -13,5 +13,11 @@ namespace WalutyBusinessLogic.DatabaseLoading
         public WalutyDBContext(DbContextOptions<WalutyDBContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<UserCurrency>()
+                .HasKey(uc => new { uc.CurrencyId, uc.UserId });
+        }
     }
 }
