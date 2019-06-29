@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace WalutyBusinessLogic.LoadingFromFile
 {
     public class Loader : ILoader
     {
         public List<Currency> AllCurrencies { get; set; }
-        private string PathToDirectory = @"WalutyBusinessLogic\LoadingFromFile\FilesToLoad\omeganbp";
+        private string PathToDirectory = @"LoadingFromFile\FilesToLoad\omeganbp";
+        string AssemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         private string Separator = ",";
 
         public void Init()
@@ -31,7 +33,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
         {
             List<Currency> currencies = new List<Currency>();
 
-            foreach (string currencyFileName in GetAvailableTxtFileNames())
+            foreach(string currencyFileName in GetAvailableTxtFileNames())
             {
                 currencies.Add(LoadCurrencyFromFile(currencyFileName));
             }
@@ -54,7 +56,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
 
         private string GetCurrenciesFolderPath()
         {
-            return Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, $"{PathToDirectory}");
+            return Path.Combine(AssemblyPath, $"{PathToDirectory}");
         }
 
         private List<string> LoadLinesFromFile(string fileName)
@@ -126,7 +128,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
             List<string> currenciesFilesNames = GetAvailableTxtFileNames();
             List<CurrencyInfo> infoToReturn = new List<CurrencyInfo>();
 
-            foreach(string currencyFileName in currenciesFilesNames)
+            foreach (string currencyFileName in currenciesFilesNames)
             {
                 StreamReader streamReader;
 
@@ -151,11 +153,10 @@ namespace WalutyBusinessLogic.LoadingFromFile
                             line.Split(currencyFileName)[1].Trim(),
                             currencyFileName.Split(".")[0]));
                         break;
-                    } 
+                    }
                 }
             }
             return infoToReturn;
         }
     }
-
 }

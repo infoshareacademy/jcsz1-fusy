@@ -10,7 +10,7 @@ namespace WalutyBusinessLogic.Services
         public bool CheckingIfDateExists(DateTime dateCurrency, string nameCurrency)
         {
             List<CurrencyRecord> CurrencyDateList = GetRecordDateList(nameCurrency);
-            if (CurrencyDateList.Any(c => c.Date == dateCurrency))
+            if (CurrencyDateList.Exists(c => c.Date == dateCurrency))
             {
                 return true;
             }
@@ -22,8 +22,8 @@ namespace WalutyBusinessLogic.Services
         {
             List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
             List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
-            if(FirstCurrencyRecordList.Any(c=> c.Date == dateCurrency) 
-            && (SecondCurrencyRecordList.Any(c=> c.Date == dateCurrency)))
+            if(FirstCurrencyRecordList.Exists(c=> c.Date == dateCurrency)
+            && (SecondCurrencyRecordList.Exists(c=> c.Date == dateCurrency)))
             {
                 return true;
             }
