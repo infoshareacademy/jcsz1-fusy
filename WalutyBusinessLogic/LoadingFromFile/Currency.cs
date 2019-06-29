@@ -8,7 +8,7 @@ namespace WalutyBusinessLogic.LoadingFromFile
         public int Id { get; set; }
         public string Name { get; set; }
         public List<CurrencyRecord> ListOfRecords { get; set; }
-        public List<User> UsersThatLikeThisCurrency { get; set; }
+        public List<UserCurrency> FavoritedByUsers { get; set; }
 
         public Currency(string name)
         {

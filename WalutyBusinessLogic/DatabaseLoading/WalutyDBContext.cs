@@ -9,6 +9,7 @@ namespace WalutyBusinessLogic.DatabaseLoading
     {
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<CurrencyInfo> CurrencyInfos { get; set; }
+        public DbSet<UserCurrency> UsersCurrencies { get; set; }
 
         public WalutyDBContext(DbContextOptions<WalutyDBContext> options) : base(options)
         {
@@ -16,6 +17,8 @@ namespace WalutyBusinessLogic.DatabaseLoading
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.Entity<UserCurrency>()
                 .HasKey(uc => new { uc.CurrencyId, uc.UserId });
         }

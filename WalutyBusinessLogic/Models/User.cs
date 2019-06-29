@@ -6,6 +6,6 @@ namespace WalutyBusinessLogic.Models
 {
     public class User : IdentityUser
     {
-        public List<Currency> FavouriteCurrencies { get; set; }
+        public List<UserCurrency> UserFavoriteCurrencies { get; set; }
     }
 }
