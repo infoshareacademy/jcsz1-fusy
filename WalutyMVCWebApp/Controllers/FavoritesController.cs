@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WalutyBusinessLogic.Models;
 
 namespace WalutyMVCWebApp.Controllers
 {
+    [Authorize]
     public class FavoritesController : Controller
     {
+        private readonly UserManager<User> _userManager;
+
+        public FavoritesController(UserManager<User> userManager)
+        {
+            _userManager = userManager;
+        }
         // GET: Favorites
         public ActionResult Index()
         {
