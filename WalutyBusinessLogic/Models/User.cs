@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using WalutyBusinessLogic.LoadingFromFile;
 
 namespace WalutyBusinessLogic.Models
 {
     public class User : IdentityUser
     {
+        public List<Currency> FavouriteCurrencies { get; set; }
     }
 }
