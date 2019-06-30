@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WalutyBusinessLogic.LoadingFromFile;
+using System.Linq;
 
 namespace WalutyBusinessLogic.Services
 {

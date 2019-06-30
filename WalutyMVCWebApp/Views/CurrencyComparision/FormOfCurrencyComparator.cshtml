@@ -9,7 +9,7 @@
     <form asp-controller="CurrencyComparision" asp-action="ShowResultCurrencyComparision" method="post">
         <div class="form-group">
             <div class="form-control">
-                <label>Date</label>
+                <label>Date          </label>
                 <input type="date" asp-for="Date" name="Date" />
                 <span asp-validation-for="Date" class="text-danger"></span>
                 @if (ViewBag.DateRangeForComparison != null)
