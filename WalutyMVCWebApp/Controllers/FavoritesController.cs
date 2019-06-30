@@ -27,7 +27,9 @@ namespace WalutyMVCWebApp.Controllers
         // GET: Favorites
         public async Task<ActionResult> Index()
         {
-            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
+            var loggedInUser = await _userManager.Users
+                .Include(u => u.UserFavoriteCurrencies)
+                .SingleAsync(u => u.UserName == User.Identity.Name);
 
             List<Currency> currencies = _context.UsersCurrencies.Where(u => u.User.Id == loggedInUser.Id).Select(x => x.Currency).ToList();
 
@@ -36,18 +38,23 @@ namespace WalutyMVCWebApp.Controllers
 
         public async Task<ActionResult> Add(int currencyId)
         {
-            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
+            var loggedInUser = await _userManager.Users
+                .Include(u => u.UserFavoriteCurrencies)
+                .SingleAsync(u => u.UserName == User.Identity.Name);
+
             var favoriteCurrency = _context.Currencies.Find(currencyId);
 
             _context.UsersCurrencies.Add(new UserCurrency()
             {
                 Currency = favoriteCurrency,
                 User = loggedInUser,
+                UserId = loggedInUser.Id,
+                CurrencyId = currencyId
             });
             
             _context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
 
@@ -55,19 +62,16 @@ namespace WalutyMVCWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(int currencyId)
         {
-            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
-
-            // Check if this part is needed
-            var favoriteToRemove = loggedInUser.UserFavoriteCurrencies.Single(x => x.CurrencyId == currencyId);
-            loggedInUser.UserFavoriteCurrencies.Remove(favoriteToRemove);
-            //
+            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies)
+                .Include(u => u.Id)
+                .SingleAsync(u => u.UserName == User.Identity.Name);
 
             var userCurrencies = _context.UsersCurrencies.Single(x => x.User.Id == loggedInUser.Id && x.CurrencyId == currencyId);
-            _context.UsersCurrencies.Remove(userCurrencies);
 
+            _context.UsersCurrencies.Remove(userCurrencies);
             _context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
