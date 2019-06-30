@@ -57,13 +57,11 @@ namespace WalutyMVCWebApp.Controllers
             return RedirectToAction("Index","Home");
         }
 
-
         // POST: Favorites/Delete/5
         [HttpPost]
         public async Task<ActionResult> Delete(int currencyId)
         {
             var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies)
-                .Include(u => u.Id)
                 .SingleAsync(u => u.UserName == User.Identity.Name);
 
             var userCurrencies = _context.UsersCurrencies.Single(x => x.User.Id == loggedInUser.Id && x.CurrencyId == currencyId);
