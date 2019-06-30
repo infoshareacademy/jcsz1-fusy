@@ -4,8 +4,8 @@ namespace WalutyBusinessLogic.Services
 {
     public interface IDateChecker
     {
-        bool CheckingIfDateExists(DateTime dateCurrency, string nameCurrency);
         bool CheckingIfDateExistsForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
-           string secondNameCurrency);
+            string secondNameCurrency);
+        bool CheckingIfDateExistInRange(DateTime firstDate, DateTime secondDate, string currencyName);
     }
 }

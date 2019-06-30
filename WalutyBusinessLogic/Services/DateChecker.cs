@@ -7,23 +7,24 @@ namespace WalutyBusinessLogic.Services
 {
     public class DateChecker : IDateChecker
     {
-        public bool CheckingIfDateExists(DateTime dateCurrency, string nameCurrency)
+        public bool CheckingIfDateExistsForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
+            string secondNameCurrency)
         {
-            List<CurrencyRecord> CurrencyDateList = GetRecordDateList(nameCurrency);
-            if (CurrencyDateList.Exists(c => c.Date == dateCurrency))
+            List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
+            List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
+            if ((FirstCurrencyRecordList.Any(c => c.Date == dateCurrency))
+            && (SecondCurrencyRecordList.Any(c => c.Date == dateCurrency)))
             {
                 return true;
             }
             else return false;
         }
 
-        public bool CheckingIfDateExistsForTwoCurrencies(DateTime dateCurrency, string firstNameCurrency,
-            string secondNameCurrency)
+        public bool CheckingIfDateExistInRange(DateTime firstDate, DateTime secondDate, string currencyName)
         {
-            List<CurrencyRecord> FirstCurrencyRecordList = GetRecordDateList(firstNameCurrency);
-            List<CurrencyRecord> SecondCurrencyRecordList = GetRecordDateList(secondNameCurrency);
-            if(FirstCurrencyRecordList.Exists(c=> c.Date == dateCurrency)
-            && (SecondCurrencyRecordList.Exists(c=> c.Date == dateCurrency)))
+            List<CurrencyRecord> CurrencyRecordList = GetRecordDateList(currencyName);
+            if (CurrencyRecordList.Exists(c => c.Date >= firstDate) &&
+                CurrencyRecordList.Exists(c => c.Date <= secondDate))
             {
                 return true;
             }
@@ -40,3 +41,4 @@ namespace WalutyBusinessLogic.Services
         }
     }
 }
+
