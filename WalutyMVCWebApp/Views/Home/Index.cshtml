@@ -3,6 +3,7 @@
 @using X.PagedList.Mvc.Common
 @using Microsoft.AspNetCore.Identity
 @using WalutyBusinessLogic.Models
+@using Microsoft.EntityFrameworkCore;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @{
@@ -15,10 +16,10 @@
 
     if (SignInManager.IsSignedIn(User))
     {
-        applicationUser = await UserManager.GetUserAsync(User);
+        applicationUser = await UserManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
         favoriteCurrency = applicationUser.UserFavoriteCurrencies;
     }
-    
+
 }
 
 <div class="text-center">
