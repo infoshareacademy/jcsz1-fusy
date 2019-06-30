@@ -1,14 +1,31 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @using X.PagedList.Mvc.Common
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Home Page";
+}
+
+@{
+    User applicationUser = null;
+    List<UserCurrency> favoriteCurrency = null;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+
+
+        applicationUser = await UserManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
+        favoriteCurrency = applicationUser.UserFavoriteCurrencies;
+    }
+
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
-
 
 <form asp-controller="Home" asp-action="Index" method="get">
     <div class="md-form mt-0">
@@ -16,7 +33,6 @@
     </div>
 </form>
 <table class="table">
-
     <thead>
         <tr>
             <th scope="col">Currency code</th>
@@ -27,18 +43,41 @@
     <tbody>
         @foreach (var currencyInfo in ViewBag.SinglePageOfCurrencyInfo)
         {
-        <tr>
-            <td>@currencyInfo.Code</td>
-            <td>@currencyInfo.Name</td>
-            <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
-        </tr>
+            <tr>
+                <td>@currencyInfo.Code</td>
+                <td>@currencyInfo.Name</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    bool isAlreadyIn = false;
+
+                    foreach (var currencyUser in favoriteCurrency)
+                    {
+                        if (currencyInfo.Id == currencyUser.CurrencyId && !isAlreadyIn)
+                        {
+                            isAlreadyIn = true;
+                            break;
+                        }
+                    }
+                    if (isAlreadyIn)
+                    {
+                        <td><form method="post" asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currencyInfo.Id">
+                            <input class="btn btn-danger" type="submit" value="Remove from favorites" />
+                        </form></td>
+                    }
+                    else
+                    {
+                        <td><a class="btn btn-info" asp-controller="Favorites" asp-action="Add" asp-route-currencyId="@currencyInfo.Id">Add to Favorites</a></td>
+                    }
+                }
+            </tr>
         }
     </tbody>
 </table>
 
 @Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo,
     page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
-    new PagedListRenderOptions {
+    new PagedListRenderOptions
+    {
         LiElementClasses = new string[] { "page-item" },
         PageClasses = new string[] { "page-link" },
         MaximumPageNumbersToDisplay = 5,
