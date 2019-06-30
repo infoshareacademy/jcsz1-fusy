@@ -15,7 +15,7 @@ namespace WalutyMVCWebApp
 
         public static int Main(string[] args)
         {
-           var hostBuilder = CreateWebHostBuilder(args).Build();          
+           var hostBuilder = CreateWebHostBuilder(args).Build();
 
             Log.Logger = new LoggerConfiguration()
            .MinimumLevel.Debug()

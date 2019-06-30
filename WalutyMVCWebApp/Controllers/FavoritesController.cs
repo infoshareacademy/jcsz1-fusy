@@ -57,8 +57,13 @@ namespace WalutyMVCWebApp.Controllers
         {
             var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
 
+            // Check if this part is needed
             var favoriteToRemove = loggedInUser.UserFavoriteCurrencies.Single(x => x.CurrencyId == currencyId);
             loggedInUser.UserFavoriteCurrencies.Remove(favoriteToRemove);
+            //
+
+            var userCurrencies = _context.UsersCurrencies.Single(x => x.User.Id == loggedInUser.Id && x.CurrencyId == currencyId);
+            _context.UsersCurrencies.Remove(userCurrencies);
 
             _context.SaveChanges();
 

@@ -63,12 +63,12 @@
                     if (isAlreadyIn)
                     {
                         <td><form method="post" asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currencyInfo.Id">
-                            <input type="submit" value="Remove from favorites" />
+                            <input class="btn btn-danger" type="submit" value="Remove from favorites" />
                         </form></td>
                     }
                     else
                     {
-                        <td><a asp-controller="Favorites" asp-action="Add" asp-route-currencyId="@currencyInfo.Id">Add to Favorites</a></td>
+                        <td><a class="btn btn-info" asp-controller="Favorites" asp-action="Add" asp-route-currencyId="@currencyInfo.Id">Add to Favorites</a></td>
                     }
                 }
             </tr>
