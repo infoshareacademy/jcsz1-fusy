@@ -16,6 +16,7 @@
     if (SignInManager.IsSignedIn(User))
     {
 
+
         applicationUser = await UserManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
         favoriteCurrency = applicationUser.UserFavoriteCurrencies;
     }

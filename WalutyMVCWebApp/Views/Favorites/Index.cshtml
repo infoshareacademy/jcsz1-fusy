@@ -6,8 +6,8 @@
 
 <h1>Favorite currencies</h1>
 
-@foreach (var pair in Model)
-{
+
+
     <table class="table">
         <thead>
         <tr>
@@ -16,9 +16,12 @@
         <tr></tr>
         </thead>
         <tbody>
+        @foreach (var pair in Model)
+        {
             <tr>
                 <td>@pair.Name</td>
             </tr>
+        }
         </tbody>
     </table>
 }
