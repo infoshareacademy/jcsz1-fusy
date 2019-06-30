@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WalutyBusinessLogic.DatabaseLoading;
+using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Models;
 
 namespace WalutyMVCWebApp.Controllers
@@ -9,75 +15,42 @@ namespace WalutyMVCWebApp.Controllers
     [Authorize]
     public class FavoritesController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        // Remember to create separate controller for these methods
 
-        public FavoritesController(UserManager<User> userManager)
+        private readonly UserManager<User> _userManager;
+        private readonly WalutyDBContext _context;
+
+        public FavoritesController(UserManager<User> userManager, WalutyDBContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
         // GET: Favorites
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
+
+            List<Currency> currencies = _context.UsersCurrencies.Where(u => u.User.Id == loggedInUser.Id).Select(x => x.Currency).ToList();
+
+            return View(currencies);
         }
 
-        // GET: Favorites/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Add(int currencyId)
         {
-            return View();
-        }
+            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
+            var favoriteCurrency = _context.Currencies.Find(currencyId);
 
-        // GET: Favorites/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Favorites/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            _context.UsersCurrencies.Add(new UserCurrency()
             {
-                // TODO: Add insert logic here
+                Currency = favoriteCurrency,
+                User = loggedInUser,
+            });
+            
+            _context.SaveChanges();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        // GET: Favorites/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Favorites/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Favorites/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: Favorites/Delete/5
         [HttpPost]

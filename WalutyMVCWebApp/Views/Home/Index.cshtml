@@ -2,7 +2,6 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Common
 @using Microsoft.AspNetCore.Identity
-@using WalutyBusinessLogic.Models
 @using Microsoft.EntityFrameworkCore;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -61,11 +60,11 @@
                     }
                     if (isAlreadyIn)
                     {
-                        <td><a asp-controller="Favorites" asp-action="delete" asp-route-id="@currencyInfo.Id">Remove from Favorites</a></td>
+                        <td><a asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currencyInfo.Id">Remove from Favorites</a></td>
                     }
                     else
                     {
-                        <td><a asp-controller="Favorites" asp-action="add" asp-route-id="@currencyInfo.Id">Add to Favorites</a></td>
+                        <td><a asp-controller="Favorites" asp-action="Add" asp-route-currencyId="@currencyInfo.Id">Add to Favorites</a></td>
                     }
                 }
             </tr>
