@@ -9,6 +9,18 @@
     ViewData["Title"] = "Home Page";
 }
 
+@{
+    User applicationUser = null;
+    List<UserCurrency> favoriteCurrency = null;
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        applicationUser = await UserManager.GetUserAsync(User);
+        favoriteCurrency = applicationUser.UserFavoriteCurrencies;
+    }
+    
+}
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
 </div>
@@ -36,7 +48,24 @@
                 <td>@currencyInfo.Name</td>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                <td><a asp-controller="Favorites" asp-action="add" asp-route-id="@currencyInfo.Id">Add to Favorites</a></td>
+                    bool isAlreadyIn = false;
+
+                    foreach (var currencyUser in favoriteCurrency)
+                    {
+                        if (currencyInfo.Id == currencyUser.CurrencyId && !isAlreadyIn)
+                        {
+                            isAlreadyIn = true;
+                            break;
+                        }
+                    }
+                    if (isAlreadyIn)
+                    {
+                        <td><a asp-controller="Favorites" asp-action="delete" asp-route-id="@currencyInfo.Id">Remove from Favorites</a></td>
+                    }
+                    else
+                    {
+                        <td><a asp-controller="Favorites" asp-action="add" asp-route-id="@currencyInfo.Id">Add to Favorites</a></td>
+                    }
                 }
             </tr>
         }
