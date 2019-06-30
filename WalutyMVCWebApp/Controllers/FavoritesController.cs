@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +14,7 @@ namespace WalutyMVCWebApp.Controllers
     [Authorize]
     public class FavoritesController : Controller
     {
-        // Remember to create separate controller for these methods
+        // Remember to create separate controller for these methods, pushed due to deadline
 
         private readonly UserManager<User> _userManager;
         private readonly WalutyDBContext _context;
