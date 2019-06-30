@@ -15,6 +15,7 @@
 
     if (SignInManager.IsSignedIn(User))
     {
+
         applicationUser = await UserManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
         favoriteCurrency = applicationUser.UserFavoriteCurrencies;
     }
@@ -60,7 +61,9 @@
                     }
                     if (isAlreadyIn)
                     {
-                        <td><a asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currencyInfo.Id">Remove from Favorites</a></td>
+                        <td><form method="post" asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currencyInfo.Id">
+                            <input type="submit" value="Remove from favorites" />
+                        </form></td>
                     }
                     else
                     {

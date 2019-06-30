@@ -54,19 +54,16 @@ namespace WalutyMVCWebApp.Controllers
 
         // POST: Favorites/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int currencyId)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var loggedInUser = await _userManager.Users.Include(u => u.UserFavoriteCurrencies).SingleAsync(u => u.UserName == User.Identity.Name);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var favoriteToRemove = loggedInUser.UserFavoriteCurrencies.Single(x => x.CurrencyId == currencyId);
+            loggedInUser.UserFavoriteCurrencies.Remove(favoriteToRemove);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
