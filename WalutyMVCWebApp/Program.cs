@@ -21,7 +21,7 @@ namespace WalutyMVCWebApp
            .MinimumLevel.Debug()
            .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
            .Enrich.FromLogContext()
-           .WriteTo.RollingFile("./logs/log-{Date}.txt")
+           .WriteTo.RollingFile(@"C:\Logs\log-{Date}.txt")
            .CreateLogger();
 
             using (var scope = hostBuilder.Services.CreateScope())

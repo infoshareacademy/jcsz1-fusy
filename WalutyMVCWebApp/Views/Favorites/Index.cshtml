@@ -1,0 +1,31 @@
+﻿@model List<WalutyBusinessLogic.LoadingFromFile.Currency>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Favorite currencies</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Currency Code</th>
+        </tr>
+        <tr></tr>
+        </thead>
+        <tbody>
+            @foreach (var currency in Model)
+            {
+            <tr>
+                <td>@currency.Name</td>
+                <td>
+                    <form method="post" asp-controller="Favorites" asp-action="Delete" asp-route-currencyId="@currency.Id">
+                        <input class="btn btn-danger" type="submit" value="Remove from favorites" />
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
