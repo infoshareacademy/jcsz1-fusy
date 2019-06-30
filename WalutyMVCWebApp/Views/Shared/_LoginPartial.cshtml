@@ -7,8 +7,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <li class="nav-item px-2">
-                <span class="nav-link btn btn-link">Favorite Currencies</span>
-                <!-- <!-- Link to favorite currencies should be added  -->
+                <a class="nav-link btn btn-link" asp-controller="Favorites" asp-action="Index">Favorite Currencies</a>
             </li>
 
             <li class="nav-item px-2">
