@@ -27,14 +27,12 @@
     <h1 class="display-4">Welcome</h1>
 </div>
 
-
 <form asp-controller="Home" asp-action="Index" method="get">
     <div class="md-form mt-0">
         <input name="searchString" class="form-control" type="text" value="@ViewBag.searchFilter" placeholder="Search by code" aria-label="Search">
     </div>
 </form>
 <table class="table">
-
     <thead>
         <tr>
             <th scope="col">Currency code</th>
