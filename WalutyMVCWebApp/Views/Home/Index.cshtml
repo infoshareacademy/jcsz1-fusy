@@ -1,6 +1,10 @@
 ﻿@using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @using X.PagedList.Mvc.Common
+@using Microsoft.AspNetCore.Identity
+@using WalutyBusinessLogic.Models
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -27,18 +31,22 @@
     <tbody>
         @foreach (var currencyInfo in ViewBag.SinglePageOfCurrencyInfo)
         {
-        <tr>
-            <td>@currencyInfo.Code</td>
-            <td>@currencyInfo.Name</td>
-            <!--<td><a class="btn btn-primary" style="visibility: hidden" asp-controller="Home" asp-action="Index">Show Details</a></td>-->
-        </tr>
+            <tr>
+                <td>@currencyInfo.Code</td>
+                <td>@currencyInfo.Name</td>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                <td><a asp-controller="Favorites" asp-action="add" asp-route-id="@currencyInfo.Id">Add to Favorites</a></td>
+                }
+            </tr>
         }
     </tbody>
 </table>
 
 @Html.PagedListPager((IPagedList)ViewBag.SinglePageOfCurrencyInfo,
     page => Url.Action("Index", new { page = page, searchString = ViewBag.searchFilter }),
-    new PagedListRenderOptions {
+    new PagedListRenderOptions
+    {
         LiElementClasses = new string[] { "page-item" },
         PageClasses = new string[] { "page-link" },
         MaximumPageNumbersToDisplay = 5,
