@@ -25,40 +25,6 @@ namespace Waluty.Tests.Services
         }
 
         [Fact]
-        public void DateChecker_For_Single_Currency_Must_Return_True_On_WorkingDay()
-        {
-            // Arrange
-            var unitUnderTest = this.CreateDateChecker();
-            DateTime dateCurrency = new DateTime(2019, 1, 18);
-            string nameCurrency = "USD";
-
-            // Act
-            var result = unitUnderTest.CheckingIfDateExists(
-                dateCurrency,
-                nameCurrency);
-
-            // Assert
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void DateChecker_For_Single_Currency_Must_Return_False_On_Holiday()
-        {
-            // Arrange
-            var unitUnderTest = this.CreateDateChecker();
-            DateTime dateCurrency = new DateTime(2001, 06, 10);
-            string nameCurrency = "USD";
-
-            // Act
-            var result = unitUnderTest.CheckingIfDateExists(
-                dateCurrency,
-                nameCurrency);
-
-            // Assert
-            Assert.False(result);
-        }
-
-        [Fact]
         public void DateChecker_For_Two_Currencies_Must_Return_True_On_WorkingDay()
         {
             // Arrange

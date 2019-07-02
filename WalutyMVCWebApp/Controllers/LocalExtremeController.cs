@@ -30,8 +30,7 @@ namespace WalutyMVCWebApp.Controllers
             {
                 return View("FormOfLocalExtreme", model);
             }
-            if (!_dateChecker.CheckingIfDateExists(model.EndDate, model.NameCurrency )
-                || !_dateChecker.CheckingIfDateExists(model.StartDate, model.NameCurrency))
+            if (!_dateChecker.CheckingIfDateExistInRange(model.StartDate, model.EndDate, model.NameCurrency))
             {
                 ViewBag.DateRangeForLocalExtreme = _dateRange.GetDateRangeCurrency(model.NameCurrency);
 
