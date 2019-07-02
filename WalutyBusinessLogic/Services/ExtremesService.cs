@@ -14,12 +14,22 @@ namespace WalutyBusinessLogic.Services
             _loader = loader;
         }
 
-        public GlobalExtremeValueModel GetGlobalExtremes(GlobalExtremeValueModel extremeValue)
+        public ExtremeModelList GetGlobalExtremes()
         {
-            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
-            extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
-            extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
-            return extremeValue;
+            ExtremeModelList AllGlobalExtremeValuesList = new ExtremeModelList();
+            List<Currency> AllCurrenciesList = _loader.GetListOfAllCurrencies();
+            foreach (var currency in AllCurrenciesList)
+            {
+                GlobalExtremeValueModel extremeValue = new GlobalExtremeValueModel();
+                List<CurrencyRecord> ListOfRecords = GetCurrencyList(currency.Name);
+                extremeValue.NameCurrency = currency.Name;
+                extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
+                extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
+                string ExtremeModelResult = $"For {extremeValue.NameCurrency}: " +
+                    $"-Max value is{extremeValue.MaxValue},  -Min value is {extremeValue.MinValue}";
+                AllGlobalExtremeValuesList.GlobalExtremeValueList.Add(ExtremeModelResult);
+            }
+            return AllGlobalExtremeValuesList;
         }
 
         public LocalExtremeValueModel GetLocalExtremes(LocalExtremeValueModel extremeValue)

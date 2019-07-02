@@ -26,7 +26,7 @@ namespace WalutyMVCWebApp.Controllers
             {
                 return View("FormOfGlobalExtreme", model);
             }
-            return View(_extremeServices.GetGlobalExtremes(model));
+            return View(_extremeServices.GetGlobalExtremes());
         }
     }
 }
