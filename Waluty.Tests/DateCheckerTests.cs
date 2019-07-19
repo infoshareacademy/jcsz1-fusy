@@ -61,5 +61,43 @@ namespace Waluty.Tests.Services
             // Assert
             Assert.False(result);
         }
+
+        [Fact]//not work
+         public void DateChecker_For_Date_In_Range_Must_Return_True()
+        { 
+            // Arrange
+            var unitUnderTest = this.CreateDateChecker();
+            DateTime firstDateCurrency = new DateTime(2001, 06, 11);
+            DateTime secondDateCurrency = new DateTime(2000, 01, 04);
+            string secondNameCurrency = "AUD";
+
+            // Act
+            var result = unitUnderTest.CheckingIfDateExistInRange(
+                firstDateCurrency,
+                secondDateCurrency,
+                secondNameCurrency);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]//not work
+        public void DateChecker_For_Date_Out_Of_Range_Must_Return_Flase()
+        {
+            // Arrange
+            var unitUnderTest = this.CreateDateChecker();
+            DateTime firstDateCurrency = new DateTime(2001, 06, 11);
+            DateTime secondDateCurrency = new DateTime(2000, 01, 04);
+            string secondNameCurrency = "AUD";
+
+            // Act
+            var result = unitUnderTest.CheckingIfDateExistInRange(
+                firstDateCurrency,
+                secondDateCurrency,
+                secondNameCurrency);
+
+            // Assert
+            Assert.True(result);
+        }
     }
 }
