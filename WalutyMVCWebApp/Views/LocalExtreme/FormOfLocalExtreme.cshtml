@@ -10,7 +10,9 @@
         <div class="form-group">
             <div class="form-control">
                 <label>Currency </label>
-                <input type="text" asp-for="NameCurrency" name="NameCurrency" />
+                <select asp-for="NameCurrency">
+                    <partial name="AllCurrencyListSelect">
+                </select>
                 <span asp-validation-for="NameCurrency" class="text-danger"></span>
                 @if (ViewBag.DateRangeForLocalExtreme != null)
                 {
