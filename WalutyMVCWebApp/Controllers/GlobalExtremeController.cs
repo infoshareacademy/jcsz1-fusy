@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Services;
-using WalutyBusinessLogic.Models;
 
 namespace WalutyMVCWebApp.Controllers
 {
@@ -13,19 +12,8 @@ namespace WalutyMVCWebApp.Controllers
             _extremeServices = new ExtremesServices(loader);
         }
 
-        public IActionResult FormOfGlobalExtreme()
+        public IActionResult ShowGlobalExtreme()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult ShowGlobaExtreme(GlobalExtremeValueModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("FormOfGlobalExtreme", model);
-            }
             return View(_extremeServices.GetGlobalExtremes());
         }
     }

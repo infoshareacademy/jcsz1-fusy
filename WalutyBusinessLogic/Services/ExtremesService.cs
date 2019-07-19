@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Models;
@@ -25,8 +27,8 @@ namespace WalutyBusinessLogic.Services
                 extremeValue.NameCurrency = currency.Name;
                 extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
                 extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
-                string ExtremeValueResult = $"For {extremeValue.NameCurrency}: \n " +
-                    $"-Max value is{extremeValue.MaxValue}, \n  -Min value is {extremeValue.MinValue}";
+                string ExtremeValueResult = $"For {extremeValue.NameCurrency}: " +
+                    $"\n -Max value is {extremeValue.MaxValue}, \n -Min value is {extremeValue.MinValue}";
                 AllGlobalExtremeValuesList.Add(ExtremeValueResult);
             }
             return AllGlobalExtremeValuesList;
