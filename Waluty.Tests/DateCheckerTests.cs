@@ -62,42 +62,61 @@ namespace Waluty.Tests.Services
             Assert.False(result);
         }
 
-        [Fact]//not work
+        [Fact]
          public void DateChecker_For_Date_In_Range_Must_Return_True()
         { 
             // Arrange
             var unitUnderTest = this.CreateDateChecker();
-            DateTime firstDateCurrency = new DateTime(2001, 06, 11);
-            DateTime secondDateCurrency = new DateTime(2000, 01, 04);
-            string secondNameCurrency = "AUD";
+            DateTime firstDateCurrency = new DateTime(1995, 06, 11);
+            DateTime secondDateCurrency = new DateTime(1995, 06, 20);
+            string NameCurrency = "USD";
 
             // Act
             var result = unitUnderTest.CheckingIfDateExistInRange(
                 firstDateCurrency,
                 secondDateCurrency,
-                secondNameCurrency);
+                NameCurrency);
 
             // Assert
             Assert.True(result);
         }
 
-        [Fact]//not work
+        [Fact]
         public void DateChecker_For_Date_Out_Of_Range_Must_Return_Flase()
         {
             // Arrange
             var unitUnderTest = this.CreateDateChecker();
-            DateTime firstDateCurrency = new DateTime(2001, 06, 11);
-            DateTime secondDateCurrency = new DateTime(2000, 01, 04);
-            string secondNameCurrency = "AUD";
+            DateTime firstDateCurrency = new DateTime(1990, 01, 29);
+            DateTime secondDateCurrency = new DateTime(1991, 01, 02);
+            string NameCurrency = "AUD";
 
             // Act
             var result = unitUnderTest.CheckingIfDateExistInRange(
                 firstDateCurrency,
                 secondDateCurrency,
-                secondNameCurrency);
+                NameCurrency);
 
             // Assert
-            Assert.True(result);
+            Assert.False(result);
+        }
+
+        [Fact]//not work
+        public void DateChecker_For_Date_In_Range_But_In_Weekend_Must_Return_Flase()
+        {
+            // Arrange
+            var unitUnderTest = this.CreateDateChecker();
+            DateTime firstDateCurrency = new DateTime(2009, 02, 07);
+            DateTime secondDateCurrency = new DateTime(2009, 02, 08);
+            string NameCurrency = "EUR";
+
+            // Act
+            var result = unitUnderTest.CheckingIfDateExistInRange(
+                firstDateCurrency,
+                secondDateCurrency,
+                NameCurrency);
+
+            // Assert
+            Assert.False(result);
         }
     }
 }
