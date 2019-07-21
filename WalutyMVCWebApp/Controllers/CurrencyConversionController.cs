@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.Models;
 using WalutyBusinessLogic.Services;
+using System.Threading.Tasks;
 
 namespace WalutyMVCWebApp.Controllers
 {
@@ -11,11 +12,11 @@ namespace WalutyMVCWebApp.Controllers
         private readonly DateChecker _dateChecker;
         private readonly DateRange _dateRange;
         private readonly CurrencyNameChecker _currencyNameChecker;
-        public CurrencyConversionController(ILoader loader)
+        public CurrencyConversionController(ICurrencyRepository repository)
         {
-            _currencyConversionService = new CurrencyConversionService(loader);
-            _dateChecker = new DateChecker();
-            _dateRange = new DateRange(loader);
+            _currencyConversionService = new CurrencyConversionService(repository);
+            _dateChecker = new DateChecker(repository);
+            _dateRange = new DateRange(repository);
             _currencyNameChecker = new CurrencyNameChecker();
         }
 
@@ -26,7 +27,7 @@ namespace WalutyMVCWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ShowResultCurrencyConversion(CurrencyConversionModel model)
+        public async Task<IActionResult> ShowResultCurrencyConversion(CurrencyConversionModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +38,9 @@ namespace WalutyMVCWebApp.Controllers
                 ViewBag.ResultChekingCurrencyNameInConversion = "Currencies name must different";
                 return View("FormOfCurrencyConversion", model);
             }
-            if (!_dateChecker.CheckingIfDateExistsForTwoCurrencies(model.Date, model.FirstCurrency, model.SecondCurrency))
+            bool ResultCheckingDateForTwoCurrencies = await _dateChecker
+                .CheckingIfDateExistsForTwoCurrencies(model.Date, model.FirstCurrency, model.SecondCurrency);
+             if (!ResultCheckingDateForTwoCurrencies)
             {
                 ViewBag.DateRangeForConversion = _dateRange.GetDateRangeTwoCurrencies(model.FirstCurrency, model.SecondCurrency);
 

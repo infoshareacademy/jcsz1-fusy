@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.Services;
 
 namespace WalutyMVCWebApp.Controllers
@@ -7,9 +7,9 @@ namespace WalutyMVCWebApp.Controllers
     public class GlobalExtremeController : Controller
     {
         private readonly ExtremesServices _extremeServices;
-        public GlobalExtremeController(ILoader loader)
+        public GlobalExtremeController(ICurrencyRepository repository)
         {
-            _extremeServices = new ExtremesServices(loader);
+            _extremeServices = new ExtremesServices(repository);
         }
 
         public IActionResult ShowGlobalExtreme()

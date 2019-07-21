@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.Models;
 using WalutyBusinessLogic.Services;
+using System.Threading.Tasks;
 
 namespace WalutyMVCWebApp.Controllers
 {
@@ -10,11 +11,11 @@ namespace WalutyMVCWebApp.Controllers
         private readonly ExtremesServices _extremeServices;
         private readonly DateChecker _dateChecker;
         private readonly DateRange _dateRange;
-        public LocalExtremeController(ILoader loader)
+        public LocalExtremeController(ICurrencyRepository repository)
         {
-            _extremeServices = new ExtremesServices(loader);
-            _dateChecker = new DateChecker();
-            _dateRange = new DateRange(loader);
+            _extremeServices = new ExtremesServices(repository);
+            _dateChecker = new DateChecker(repository);
+            _dateRange = new DateRange(repository);
         }
 
         public IActionResult FormOfLocalExtreme()
@@ -24,13 +25,15 @@ namespace WalutyMVCWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ShowLocalExtreme(LocalExtremeValueModel model)
+        public async Task<IActionResult> ShowLocalExtreme(LocalExtremeValueModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View("FormOfLocalExtreme", model);
             }
-            if (!_dateChecker.CheckingIfDateExistInRange(model.StartDate, model.EndDate, model.NameCurrency))
+            bool ResultCheckingIfDateExistInRange = await _dateChecker
+                .CheckingIfDateExistInRange(model.StartDate, model.EndDate, model.NameCurrency);
+            if (!ResultCheckingIfDateExistInRange)
             {
                 ViewBag.DateRangeForLocalExtreme = _dateRange.GetDateRangeCurrency(model.NameCurrency);
 

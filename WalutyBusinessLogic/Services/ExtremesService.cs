@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using WalutyBusinessLogic.DatabaseLoading;
 using System.Linq;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Models;
+using System.Threading.Tasks;
 
 namespace WalutyBusinessLogic.Services
 {
     public class ExtremesServices
     {
-        private readonly ILoader _loader;
+        private readonly ICurrencyRepository _repository;
 
-        public ExtremesServices(ILoader loader)
+        public ExtremesServices(ICurrencyRepository repository)
         {
-            _loader = loader;
+            _repository = repository;
         }
 
-        public List<string> GetGlobalExtremes()
+        public async Task<List<string>> GetGlobalExtremes()
         {
             List<string> AllGlobalExtremeValuesList = new List<string>();
-            List<Currency> AllCurrenciesList = _loader.GetListOfAllCurrencies();
+            List<Currency> AllCurrenciesList = await _repository.GetAllCurrencies();
             foreach (var currency in AllCurrenciesList)
             {
                 GlobalExtremeValueModel extremeValue = new GlobalExtremeValueModel();
-                List<CurrencyRecord> ListOfRecords = GetCurrencyList(currency.Name);
+                List<CurrencyRecord> ListOfRecords = await GetCurrencyList(currency.Name);
                 extremeValue.NameCurrency = currency.Name;
                 extremeValue.MaxValue = ListOfRecords.Max(c => c.High);
                 extremeValue.MinValue = ListOfRecords.Min(c => c.Low);
@@ -34,9 +35,9 @@ namespace WalutyBusinessLogic.Services
             return AllGlobalExtremeValuesList;
         }
 
-        public LocalExtremeValueModel GetLocalExtremes(LocalExtremeValueModel extremeValue)
+        public async Task<LocalExtremeValueModel> GetLocalExtremes(LocalExtremeValueModel extremeValue)
         {
-            List<CurrencyRecord> ListOfRecords = GetCurrencyList(extremeValue.NameCurrency);
+            List<CurrencyRecord> ListOfRecords = await GetCurrencyList(extremeValue.NameCurrency);
             extremeValue.MaxValue = ListOfRecords.Where
                 (c => c.Date >= extremeValue.StartDate && c.Date <= extremeValue.EndDate)
                 .Max(c => c.High);
@@ -46,10 +47,10 @@ namespace WalutyBusinessLogic.Services
             return extremeValue;
         }
 
-        private List<CurrencyRecord> GetCurrencyList(string codeCurrency)
+        private async Task<List<CurrencyRecord>> GetCurrencyList(string codeCurrency)
         {
             codeCurrency += ".txt";
-            Currency currency = _loader.LoadCurrencyFromFile(codeCurrency);
+            Currency currency = await _repository.GetCurrency(codeCurrency);
             List<CurrencyRecord> listOfRecords = currency.ListOfRecords;
             return listOfRecords;
         }
