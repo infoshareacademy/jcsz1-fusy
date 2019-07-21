@@ -26,6 +26,10 @@ namespace WalutyBusinessLogic.Services
             if (CurrencyRecordList.Exists(c => c.Date >= firstDate) &&
                 CurrencyRecordList.Exists(c => c.Date <= secondDate))
             {
+                if (!CurrencyRecordList.Where(c => c.Date >= firstDate && c.Date <= secondDate).Any())
+                {
+                    return false;
+                }
                 return true;
             }
             else return false;
