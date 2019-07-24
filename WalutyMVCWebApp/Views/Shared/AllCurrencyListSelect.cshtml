@@ -1,11 +1,7 @@
-﻿@using WalutyBusinessLogic.LoadingFromFile
+﻿@model System.Collections.Generic.IList<Currency>
 
-@{ 
-    var _loader = new Loader();
-    List<Currency> AllCurrenciesList = _loader.GetListOfAllCurrencies();
-}
-
-    @foreach (var currency in AllCurrenciesList)
+@Model.ToString();
+    @foreach (var currency in Model)
     {
-        <option value="@currency.Name">@currency.Name</option>
+        <option value="@currency">@currency</option>
     }
