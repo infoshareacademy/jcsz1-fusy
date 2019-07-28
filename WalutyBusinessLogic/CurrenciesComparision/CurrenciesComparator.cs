@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.LoadingFromFile;
 using WalutyBusinessLogic.Models;
+using System.Threading.Tasks;
 
 namespace WalutyBusinessLogic.CurrenciesComparision
 {
     public class CurrenciesComparator
     {
-        private readonly ILoader _loader;
+        private readonly ICurrencyRepository _repository;
         public string FileExtension { get; set; }
 
-        public CurrenciesComparator(ILoader loader)
+        public CurrenciesComparator(ICurrencyRepository repository)
         {
-            _loader = loader;
+            _repository = repository;
             FileExtension = ".txt";
         }
 
-        public CurrenciesComparatorModel CompareCurrencies(CurrenciesComparatorModel model)
+        public async Task<CurrenciesComparatorModel> CompareCurrencies(CurrenciesComparatorModel model)
         {
-            Currency firstCurrency = _loader.LoadCurrencyFromFile(model.FirstCurrencyCode + FileExtension);
-            Currency secondCurrency = _loader.LoadCurrencyFromFile(model.SecondCurrencyCode + FileExtension);
+            Currency firstCurrency = await _repository.GetCurrency(model.FirstCurrencyCode + FileExtension);
+            Currency secondCurrency = await _repository.GetCurrency(model.SecondCurrencyCode + FileExtension);
 
             CurrencyRecord firstCurrencyRecord =
                 firstCurrency.ListOfRecords.Single(currency => currency.Date == model.Date);

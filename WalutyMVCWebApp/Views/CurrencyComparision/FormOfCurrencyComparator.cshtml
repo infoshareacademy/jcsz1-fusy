@@ -19,7 +19,9 @@
             </div>
             <div class="form-control">
                 <label>First currency</label>
-                <input type="text" asp-for="FirstCurrencyCode" name="FirstCurrencyCode" />
+                <select asp-for="FirstCurrencyCode">
+                    <partial name="AllCurrencyListSelect">
+                </select>
                 <span asp-validation-for="FirstCurrencyCode" class="text-danger"></span>
                 @if (ViewBag.ResultChekingCurrencyNameInComparision != null)
                 {
@@ -28,7 +30,9 @@
             </div>
             <div class="form-control">
                 <label>Second currency</label>
-                <input type="text" asp-for="SecondCurrencyCode" name="SecondCurrencyCode" />
+                <select asp-for="SecondCurrencyCode">
+                    <partial name="AllCurrencyListSelect">
+                </select>
                 <span asp-validation-for="SecondCurrencyCode" class="text-danger"></span>
             </div>
         </div>

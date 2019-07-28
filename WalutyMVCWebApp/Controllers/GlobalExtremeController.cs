@@ -1,32 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WalutyBusinessLogic.LoadingFromFile;
+using WalutyBusinessLogic.DatabaseLoading;
 using WalutyBusinessLogic.Services;
-using WalutyBusinessLogic.Models;
 
 namespace WalutyMVCWebApp.Controllers
 {
     public class GlobalExtremeController : Controller
     {
         private readonly ExtremesServices _extremeServices;
-        public GlobalExtremeController(ILoader loader)
+        public GlobalExtremeController(ICurrencyRepository repository)
         {
-            _extremeServices = new ExtremesServices(loader);
+            _extremeServices = new ExtremesServices(repository);
         }
 
-        public IActionResult FormOfGlobalExtreme()
+        public IActionResult ShowGlobalExtreme()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult ShowGlobaExtreme(GlobalExtremeValueModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("FormOfGlobalExtreme", model);
-            }
-            return View(_extremeServices.GetGlobalExtremes(model));
+            return View(_extremeServices.GetGlobalExtremes());
         }
     }
 }

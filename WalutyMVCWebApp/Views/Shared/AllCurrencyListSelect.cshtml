@@ -1,0 +1,7 @@
+﻿@model System.Collections.Generic.IList<string>
+
+@Model.ToString();
+    @foreach (var currency in Model)
+    {
+        <option value="@currency">@currency</option>
+    }
